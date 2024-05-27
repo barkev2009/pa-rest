@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-04/schema#",
     "$id": "./getTasksResponse.schema.json",
     "title": "get_tasks Response JSON",
-    "description": "JSON for storing response schema (POST /get_tasks)",
+    "description": "JSON for storing response schema (GET /tasks)",
     "type": "object",
     "properties": {
         "error": {
