@@ -6,7 +6,7 @@
     "type": "object",
     "properties": {
         "error": {
-            "$ref": "./error.schema.json"
+            "$ref": "../utils/error.schema.json"
         },
         "payload": {
             "type": "object",

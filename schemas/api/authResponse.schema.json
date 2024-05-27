@@ -6,7 +6,7 @@
     "type": "object",
     "properties": {
         "error": {
-            "$ref": "./error.schema.json"
+            "$ref": "../utils/error.schema.json"
         },
         "tokenData": {
             "type": "object",
@@ -43,7 +43,7 @@
                     "description": "auth type"
                 },
                 "user": {
-                    "$ref": "./user.schema.json"
+                    "$ref": "../utils/user.schema.json"
                 }
             }
         }
