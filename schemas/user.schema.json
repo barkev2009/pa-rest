@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "./user.schema.json",
+    "title": "User JSON",
+    "description": "JSON for storing default user schema",
+    "type": "object",
+    "properties": {
+        "oid": {
+            "type": "string",
+            "description": "user ID"
+        },
+        "firstName": {
+            "type": "string",
+            "description": "first name"
+        },
+        "lastName": {
+            "type": "string",
+            "description": "last name"
+        },
+        "middleName": {
+            "type": "string",
+            "description": "middle name"
+        },
+        "login": {
+            "type": "string",
+            "description": "login"
+        },
+        "userPhotoId": {
+            "type": "string",
+            "description": "user photo id"
+        }
+    }
+}

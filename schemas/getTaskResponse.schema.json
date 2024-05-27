@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "./getTaskResponse.schema.json",
+    "title": "get_task Response JSON",
+    "description": "JSON for storing response schema (POST /get_task)",
+    "type": "object",
+    "properties": {
+        "error": {
+            "$ref": "./error.schema.json"
+        },
+        "payload": {
+            "type": "object",
+            "description": "response payload",
+            "properties": {
+                "general": {
+                    "type": "object",
+                    "description": "general data",
+                    "properties": {
+                        "taskId": {
+                            "type": "string",
+                            "description": "task ID"
+                        },
+                        "taskStatus": {
+                            "type": "string",
+                            "description": "task status"
+                        },
+                        "monitoringExecutor": {
+                            "type": "string",
+                            "description": "person, responsible for monitoring execution"
+                        },
+                        "createDate": {
+                            "type": "string",
+                            "description": "task create date"
+                        },
+                        "executor": {
+                            "type": "string",
+                            "description": "task executor"
+                        }
+                    }
+                },
+                "collateralEstimate": {
+                    "type": "object",
+                    "description": "collateral estimate",
+                    "properties": {
+                        "collateralType": {
+                            "type": "string",
+                            "description": "collateral type"
+                        },
+                        "prevEstimateValue": {
+                            "type": "number",
+                            "description": "previous estimate value"
+                        },
+                        "prevCreateDate": {
+                            "type": "string",
+                            "description": "previous create date"
+                        },
+                        "curEstimateValue": {
+                            "type": "number",
+                            "description": "current estimate value"
+                        },
+                        "curCreateDate": {
+                            "type": "string",
+                            "description": "current create date"
+                        },
+                        "commentary": {
+                            "type": "string",
+                            "description": "commentary"
+                        }
+                    }
+                },
+                "contactData": {
+                    "type": "object",
+                    "description": "contact data",
+                    "properties": {
+                        "pledgerFullName": {
+                            "type": "string",
+                            "description": "pledger full name"
+                        },
+                        "phoneNumber": {
+                            "type": "string",
+                            "description": "phone number"
+                        },
+                        "pledgerAddress": {
+                            "type": "string",
+                            "description": "pledger address"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "./authRequest.schema.json",
+    "title": "auth Request JSON",
+    "description": "JSON for storing request schema (POST /auth)",
+    "type": "object",
+    "properties": {
+        "login": {
+            "type": "string",
+            "description": "user login"
+        },
+        "password": {
+            "type": "string",
+            "description": "user password"
+        }
+    },
+    "required": ["login", "password"]
+}

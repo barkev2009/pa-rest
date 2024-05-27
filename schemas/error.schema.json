@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "./error.schema.json",
+    "title": "Error Response JSON",
+    "description": "JSON for storing default error response schema",
+    "type": "object",
+    "properties": {
+        "message": {
+            "type": "string",
+            "description": "error message payload"
+        },
+        "errorDate": {
+            "type": "string",
+            "description": "error create date"
+        }
+    }
+}

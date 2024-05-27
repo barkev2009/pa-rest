@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "./getTasksResponse.schema.json",
+    "title": "get_tasks Response JSON",
+    "description": "JSON for storing response schema (POST /get_tasks)",
+    "type": "object",
+    "properties": {
+        "error": {
+            "$ref": "./error.schema.json"
+        },
+        "payload": {
+            "type": "object",
+            "description": "response payload",
+            "properties": {
+                "taskId": {
+                    "type": "string",
+                    "description": "task ID"
+                },
+                "dueDate": {
+                    "type": "string",
+                    "description": "due date"
+                },
+                "collateralType": {
+                    "type": "string",
+                    "description": "collateral type"
+                },
+                "pledgeOwner": {
+                    "type": "string",
+                    "description": "pledge owner"
+                },
+                "taskStatus": {
+                    "type": "string",
+                    "description": "task status"
+                },
+                "executor": {
+                    "$ref": "./user.schema.json"
+                }
+            }
+        }
+    }
+}

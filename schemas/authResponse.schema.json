@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "./authResponse.schema.json",
+    "title": "auth Response JSON",
+    "description": "JSON for storing response schema (POST /auth)",
+    "type": "object",
+    "properties": {
+        "error": {
+            "$ref": "./error.schema.json"
+        },
+        "tokenData": {
+            "type": "object",
+            "description": "payload for token data",
+            "properties": {
+                "accessToken": {
+                    "type": "string",
+                    "description": "access JWT-token"
+                },
+                "refreshToken": {
+                    "type": "string",
+                    "description": "refresh JWT-token"
+                }
+            }
+        },
+        "userData": {
+            "type": "object",
+            "description": "payload for user data",
+            "properties": {
+                "mustChangePassword": {
+                    "type": "boolean",
+                    "description": "must change password"
+                },
+                "passwordExpired": {
+                    "type": "boolean",
+                    "description": "password expired"
+                },
+                "userBlocked": {
+                    "type": "boolean",
+                    "description": "user is blocked"
+                },
+                "authType": {
+                    "type": "string",
+                    "description": "auth type"
+                },
+                "user": {
+                    "$ref": "./user.schema.json"
+                }
+            }
+        }
+    }
+}

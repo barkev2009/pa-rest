@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "./getTasksRequest.schema.json",
+    "title": "get_tasks Request JSON",
+    "description": "JSON for storing request schema (POST /get_tasks)",
+    "type": "object",
+    "properties": {
+        "userId": {
+            "type": "string",
+            "description": "user ID"
+        }
+    },
+    "required": ["userId"]
+}
