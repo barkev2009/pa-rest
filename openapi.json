@@ -200,7 +200,6 @@
             "example": "2024-01-01T00:00:00"
           },
           "collateralType": {
-            "type": "object",
             "$ref": "#/components/schemas/Locale"
           },
           "pledgeOwner": {
@@ -209,7 +208,6 @@
             "example": "Ivanov Ivan Ivanovich"
           },
           "taskStatus": {
-            "type": "object",
             "$ref": "#/components/schemas/Locale"
           },
           "executor": {
@@ -233,7 +231,6 @@
                 "example": "1234"
               },
               "taskStatus": {
-                "type": "object",
                 "$ref": "#/components/schemas/Locale"
               },
               "monitoringExecutor": {
@@ -258,7 +255,6 @@
             "description": "collateral estimate",
             "properties": {
               "collateralType": {
-                "type": "object",
                 "$ref": "#/components/schemas/Locale"
               },
               "prevEstimateValue": {
@@ -496,7 +492,6 @@
                 "payload": {
                   "type": "array",
                   "items": {
-                    "type": "object",
                     "$ref": "#/components/schemas/TasksItem"
                   }
                 }
@@ -519,7 +514,6 @@
                   "type": "object"
                 },
                 "payload": {
-                  "type": "object",
                   "$ref": "#/components/schemas/TaskItem"
                 }
               },

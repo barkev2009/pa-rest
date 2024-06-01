@@ -1,0 +1,405 @@
+openapi: 3.0.3
+info:
+  title: Personal Profile REST API (в стадии проработки)
+  version: 0.0.0
+tags:
+  - name: auth
+    description: User authorization
+  - name: tasks
+    description: Task operations
+  - name: collaterals
+    description: Getting collateral data
+  - name: users
+    description: Operations with users
+paths:
+  /auth:
+    post:
+      tags:
+        - auth
+      summary: Get authorization token
+      description: Get JWT-token (access and refresh)
+      operationId: auth
+      requestBody:
+        $ref: "#/components/requestBodies/Auth"
+      responses:
+        "200":
+          $ref: "#/components/responses/Auth"
+        "500":
+          $ref: "#/components/responses/Error"
+  /tasks:
+    get:
+      tags:
+        - tasks
+      summary: Get all tasks
+      description: Get all tasks by user (with limit, offset and sorting/filter data)
+      operationId: tasks
+      parameters:
+        - name: userId
+          in: query
+          description: User ID
+          required: true
+          schema:
+            type: string
+            default: "123"
+        - name: offset
+          in: query
+          description: offset value
+          required: true
+          schema:
+            type: integer
+            default: 0
+        - name: limit
+          in: query
+          description: limit value
+          required: true
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          $ref: "#/components/responses/GetTasks"
+        "500":
+          $ref: "#/components/responses/Error"
+  /task:
+    get:
+      tags:
+        - tasks
+      summary: Get task by ID
+      description: Get task details by task ID
+      operationId: task
+      parameters:
+        - name: taskId
+          in: query
+          description: Task ID
+          required: true
+          schema:
+            type: string
+            default: "123"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetTask"
+        "500":
+          $ref: "#/components/responses/Error"
+  /set_task:
+    post:
+      tags:
+        - tasks
+      summary: Set task data
+      description: Set task status and executor
+      operationId: setTask
+      requestBody:
+        $ref: "#/components/requestBodies/SetTask"
+      responses:
+        "200":
+          $ref: "#/components/responses/SetTask"
+        "500":
+          $ref: "#/components/responses/Error"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        oid:
+          type: string
+          description: user ID
+          example: "100"
+        firstName:
+          type: string
+          description: first name
+          example: Ivan
+        lastName:
+          type: string
+          description: last name
+          example: Ivanov
+        middleName:
+          type: string
+          description: middle name
+          example: Ivanovich
+        login:
+          type: string
+          description: login
+          example: ivanov
+        userPhotoId:
+          type: string
+          description: user photo id
+          example: "123"
+      xml:
+        name: user
+    TasksItem:
+      type: object
+      properties:
+        taskId:
+          type: string
+          description: task ID
+          example: "123"
+        dueDate:
+          type: string
+          description: due date
+          example: "2024-01-01T00:00:00"
+        collateralType:
+          $ref: "#/components/schemas/Locale"
+        pledgeOwner:
+          type: string
+          description: pledge owner
+          example: Ivanov Ivan Ivanovich
+        taskStatus:
+          $ref: "#/components/schemas/Locale"
+        executor:
+          $ref: "#/components/schemas/User"
+      xml:
+        name: tasksItem
+    TaskItem:
+      type: object
+      properties:
+        general:
+          type: object
+          description: general data
+          properties:
+            taskId:
+              type: string
+              description: task ID
+              example: "1234"
+            taskStatus:
+              $ref: "#/components/schemas/Locale"
+            monitoringExecutor:
+              type: string
+              description: person, responsible for monitoring execution
+              example: Ivanov Ivan Ivanovich
+            createDate:
+              type: string
+              description: task create date
+              example: "2024-01-01T00:00:00"
+            executor:
+              type: string
+              description: task executor
+              example: Ivanov Ivan Ivanovich
+        collateralEstimate:
+          type: object
+          description: collateral estimate
+          properties:
+            collateralType:
+              $ref: "#/components/schemas/Locale"
+            prevEstimateValue:
+              type: number
+              description: previous estimate value
+              example: 75.97
+            prevCreateDate:
+              type: string
+              description: previous create date
+              example: "2024-01-01T00:00:00"
+            curEstimateValue:
+              type: number
+              description: current estimate value
+              example: 175.97
+            curCreateDate:
+              type: string
+              description: current create date
+              example: "2024-02-01T00:00:00"
+            commentary:
+              type: string
+              description: commentary
+              example: default comment
+        contactData:
+          type: object
+          description: contact data
+          properties:
+            pledgerFullName:
+              type: string
+              description: pledger full name
+              example: Ivanov Ivan Ivanovich
+            phoneNumber:
+              type: string
+              description: phone number
+              example: +7-960-444-44-55
+            pledgerAddress:
+              type: string
+              description: pledger address
+              example: default address
+      xml:
+        name: taskItem
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: error message payload
+          example: default error message
+        errorDate:
+          type: string
+          description: error create date
+          example: 2024-01-01T00:00:00
+      xml:
+        name: error
+    Locale:
+      type: object
+      properties:
+        code:
+          type: string
+          description: locale code
+          example: localeCode
+        value_:
+          type: string
+          description: localized value
+          example: localeValue
+      xml:
+        name: error
+  requestBodies:
+    Auth:
+      description: User login and password
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              login:
+                type: string
+                description: user login
+                example: login
+              password:
+                type: string
+                description: user password
+                example: password
+            required:
+              - login
+              - password
+            xml:
+              name: authRequest
+      required: true
+    SetTask:
+      description: Task data to set
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              taskId:
+                type: string
+                description: task ID
+                example: "123"
+              statusCode:
+                type: string
+                description: code of the status needed
+                example: new
+              executorId:
+                type: string
+                description: executor (user) ID
+                example: "123"
+            required:
+              - taskId
+              - statusCode
+              - executorId
+            xml:
+              name: setTaskRequest
+      required: true
+  responses:
+    Auth:
+      description: successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+              tokenData:
+                type: object
+                description: payload for token data
+                properties:
+                  accessToken:
+                    type: string
+                    description: access JWT-token
+                    example: eysometoken
+                  refreshToken:
+                    type: string
+                    description: refresh JWT-token
+                    example: eyanothertoken
+              userData:
+                type: object
+                description: payload for user data
+                properties:
+                  mustChangePassword:
+                    type: boolean
+                    description: must change password
+                    example: false
+                  passwordExpired:
+                    type: boolean
+                    description: password expired
+                    example: true
+                  userBlocked:
+                    type: boolean
+                    description: user is blocked
+                    example: false
+                  authType:
+                    type: string
+                    description: auth type
+                    example: login
+                  user:
+                    $ref: "#/components/schemas/User"
+            xml:
+              name: authResponse
+    GetTasks:
+      description: successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+              payload:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TasksItem"
+            xml:
+              name: getTasksResponse
+    GetTask:
+      description: successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+              payload:
+                $ref: "#/components/schemas/TaskItem"
+            xml:
+              name: getTaskResponse
+    SetTask:
+      description: set task response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                example: {}
+              payload:
+                type: object
+                properties:
+                  taskId:
+                    type: string
+                    description: task ID
+                    example: "123"
+                  statusCode:
+                    type: string
+                    description: code of the status needed
+                    example: new
+                  executorId:
+                    type: string
+                    description: executor (user) ID
+                    example: "123"
+            xml:
+              name: setTaskResponse
+    Error:
+      description: internal error response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: "#/components/schemas/Error"
+            xml:
+              name: errorResponse
