@@ -8,7 +8,17 @@
         "userId": {
             "type": "string",
             "description": "user ID"
+        },
+        "offset": {
+            "type": "integer",
+            "description": "offset value"
+        },
+        "limit": {
+            "type": "integer",
+            "description": "limit value"
         }
     },
-    "required": ["userId"]
+    "required": [
+        "userId", "offset", "limit"
+    ]
 }
