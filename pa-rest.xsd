@@ -1,0 +1,26 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns="http://bp.ws.fisgroup.ru"
+    targetNamespace="http://bp.ws.fisgroup.ru">
+    <xs:complexType name="error">
+        <xs:sequence>
+            <xs:element name="message" type="xs:string" minOccurs="0"/>
+            <xs:element name="errorDate" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="locale">
+        <xs:sequence>
+            <xs:element name="code" type="xs:string" minOccurs="1"/>
+            <xs:element name="value_" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="user">
+        <xs:sequence>
+            <xs:element name="oid" type="xs:string" minOccurs="1"/>
+            <xs:element name="firstName" type="xs:string" minOccurs="0"/>
+            <xs:element name="lastName" type="xs:string" minOccurs="0"/>
+            <xs:element name="middleName" type="xs:string" minOccurs="0"/>
+            <xs:element name="login" type="xs:string" minOccurs="0"/>
+            <xs:element name="userPhotoId" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
