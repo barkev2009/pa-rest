@@ -3,24 +3,104 @@
     targetNamespace="http://bp.ws.fisgroup.ru">
     <xs:complexType name="error">
         <xs:sequence>
-            <xs:element name="message" type="xs:string" minOccurs="0"/>
-            <xs:element name="errorDate" type="xs:string" minOccurs="0"/>
+            <xs:element name="message" type="xs:string" minOccurs="0" />
+            <xs:element name="errorDate" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="locale">
         <xs:sequence>
-            <xs:element name="code" type="xs:string" minOccurs="1"/>
-            <xs:element name="value_" type="xs:string" minOccurs="0"/>
+            <xs:element name="code" type="xs:string" minOccurs="1" />
+            <xs:element name="value_" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="user">
         <xs:sequence>
-            <xs:element name="oid" type="xs:string" minOccurs="1"/>
-            <xs:element name="firstName" type="xs:string" minOccurs="0"/>
-            <xs:element name="lastName" type="xs:string" minOccurs="0"/>
-            <xs:element name="middleName" type="xs:string" minOccurs="0"/>
-            <xs:element name="login" type="xs:string" minOccurs="0"/>
-            <xs:element name="userPhotoId" type="xs:string" minOccurs="0"/>
+            <xs:element name="oid" type="xs:string" minOccurs="1" />
+            <xs:element name="firstName" type="xs:string" minOccurs="0" />
+            <xs:element name="lastName" type="xs:string" minOccurs="0" />
+            <xs:element name="middleName" type="xs:string" minOccurs="0" />
+            <xs:element name="login" type="xs:string" minOccurs="0" />
+            <xs:element name="userPhotoId" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
+    <xs:complexType name="tasksItem">
+        <xs:sequence>
+            <xs:element name="taskId" type="xs:string" minOccurs="1" />
+            <xs:element name="dueDate" type="xs:string" minOccurs="0" />
+            <xs:element name="collateralType" type="locale" minOccurs="0" />
+            <xs:element name="pledgeOwner" type="xs:string" minOccurs="0" />
+            <xs:element name="taskStatus" type="locale" minOccurs="0" />
+            <xs:element name="executor" type="user" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="general">
+        <xs:sequence>
+            <xs:element name="taskId" type="xs:string" minOccurs="1" />
+            <xs:element name="taskStatus" type="locale" minOccurs="0" />
+            <xs:element name="monitoringExecutor" type="xs:string" minOccurs="0" />
+            <xs:element name="createDate" type="xs:string" minOccurs="0" />
+            <xs:element name="executor" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="collateralEstimate">
+        <xs:sequence>
+            <xs:element name="collateralType" type="locale" minOccurs="0" />
+            <xs:element name="prevEstimateValue" type="xs:float" minOccurs="0" />
+            <xs:element name="prevCreateDate" type="xs:string" minOccurs="0" />
+            <xs:element name="curEstimateValue" type="xs:float" minOccurs="0" />
+            <xs:element name="curCreateDate" type="xs:string" minOccurs="0" />
+            <xs:element name="commentary" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="contactData">
+        <xs:sequence>
+            <xs:element name="pledgerFullName" type="xs:string" minOccurs="0" />
+            <xs:element name="phoneNumber" type="xs:string" minOccurs="0" />
+            <xs:element name="pledgerAddress" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="taskItem">
+        <xs:sequence>
+            <xs:element name="general" type="general" minOccurs="0" />
+            <xs:element name="collateralEstimate" type="collateralEstimate" minOccurs="0" />
+            <xs:element name="contactData" type="contactData" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="tokenData">
+        <xs:sequence>
+            <xs:element name="accessToken" type="xs:string" minOccurs="0" />
+            <xs:element name="refreshToken" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="userData">
+        <xs:sequence>
+            <xs:element name="mustChangePassword" type="xs:boolean" minOccurs="0" />
+            <xs:element name="passwordExpired" type="xs:boolean" minOccurs="0" />
+            <xs:element name="userBlocked" type="xs:boolean" minOccurs="0" />
+            <xs:element name="authType" type="xs:string" minOccurs="0" />
+            <xs:element name="user" type="user" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="authResponsePayload">
+        <xs:sequence>
+            <xs:element name="tokenData" type="tokenData" minOccurs="0" />
+            <xs:element name="userData" type="userData" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="authRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="login" type="xs:string" minOccurs="1" />
+                <xs:element name="password" type="xs:string" minOccurs="1" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="authResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="error" type="error" minOccurs="0" />
+                <xs:element name="payload" type="authResponsePayload" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

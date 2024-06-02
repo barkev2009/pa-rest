@@ -426,48 +426,53 @@
                 "error": {
                   "type": "object"
                 },
-                "tokenData": {
+                "payload": {
                   "type": "object",
-                  "description": "payload for token data",
                   "properties": {
-                    "accessToken": {
-                      "type": "string",
-                      "description": "access JWT-token",
-                      "example": "eysometoken"
+                    "tokenData": {
+                      "type": "object",
+                      "description": "payload for token data",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "description": "access JWT-token",
+                          "example": "eysometoken"
+                        },
+                        "refreshToken": {
+                          "type": "string",
+                          "description": "refresh JWT-token",
+                          "example": "eyanothertoken"
+                        }
+                      }
                     },
-                    "refreshToken": {
-                      "type": "string",
-                      "description": "refresh JWT-token",
-                      "example": "eyanothertoken"
-                    }
-                  }
-                },
-                "userData": {
-                  "type": "object",
-                  "description": "payload for user data",
-                  "properties": {
-                    "mustChangePassword": {
-                      "type": "boolean",
-                      "description": "must change password",
-                      "example": false
-                    },
-                    "passwordExpired": {
-                      "type": "boolean",
-                      "description": "password expired",
-                      "example": true
-                    },
-                    "userBlocked": {
-                      "type": "boolean",
-                      "description": "user is blocked",
-                      "example": false
-                    },
-                    "authType": {
-                      "type": "string",
-                      "description": "auth type",
-                      "example": "login"
-                    },
-                    "user": {
-                      "$ref": "#/components/schemas/User"
+                    "userData": {
+                      "type": "object",
+                      "description": "payload for user data",
+                      "properties": {
+                        "mustChangePassword": {
+                          "type": "boolean",
+                          "description": "must change password",
+                          "example": false
+                        },
+                        "passwordExpired": {
+                          "type": "boolean",
+                          "description": "password expired",
+                          "example": true
+                        },
+                        "userBlocked": {
+                          "type": "boolean",
+                          "description": "user is blocked",
+                          "example": false
+                        },
+                        "authType": {
+                          "type": "string",
+                          "description": "auth type",
+                          "example": "login"
+                        },
+                        "user": {
+                          "$ref": "#/components/schemas/User"
+                        }
+                      }
                     }
                   }
                 }
