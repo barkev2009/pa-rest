@@ -495,9 +495,34 @@
                   "type": "object"
                 },
                 "payload": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TasksItem"
+                  "type": "object",
+                  "properties": {
+                    "taskItems": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TasksItem"
+                      }
+                    },
+                    "tableData": {
+                      "type": "object",
+                      "properties": {
+                        "totalRows":{
+                          "type": "integer",
+                          "description": "total number of table rows",
+                          "example": 50
+                        },
+                        "totalPages":{
+                          "type": "integer",
+                          "description": "total number of pages",
+                          "example": 7
+                        },
+                        "currentPage":{
+                          "type": "integer",
+                          "description": "current table page",
+                          "example": 1
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -548,15 +573,11 @@
                       "description": "task ID",
                       "example": "123"
                     },
-                    "statusCode": {
-                      "type": "string",
-                      "description": "code of the status needed",
-                      "example": "new"
+                    "status": {
+                      "$ref": "#/components/schemas/Locale"
                     },
-                    "executorId": {
-                      "type": "string",
-                      "description": "executor (user) ID",
-                      "example": "123"
+                    "executor": {
+                      "$ref": "#/components/schemas/User"
                     }
                   }
                 }

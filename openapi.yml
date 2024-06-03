@@ -20,12 +20,12 @@ paths:
       description: Get JWT-token (access and refresh)
       operationId: auth
       requestBody:
-        $ref: "#/components/requestBodies/Auth"
+        $ref: '#/components/requestBodies/Auth'
       responses:
-        "200":
-          $ref: "#/components/responses/Auth"
-        "500":
-          $ref: "#/components/responses/Error"
+        '200':
+          $ref: '#/components/responses/Auth'
+        '500':
+          $ref: '#/components/responses/Error'
   /tasks:
     get:
       tags:
@@ -40,7 +40,7 @@ paths:
           required: true
           schema:
             type: string
-            default: "123"
+            default: '123'
         - name: offset
           in: query
           description: offset value
@@ -56,10 +56,10 @@ paths:
             type: integer
             default: 10
       responses:
-        "200":
-          $ref: "#/components/responses/GetTasks"
-        "500":
-          $ref: "#/components/responses/Error"
+        '200':
+          $ref: '#/components/responses/GetTasks'
+        '500':
+          $ref: '#/components/responses/Error'
   /task:
     get:
       tags:
@@ -74,12 +74,12 @@ paths:
           required: true
           schema:
             type: string
-            default: "123"
+            default: '123'
       responses:
-        "200":
-          $ref: "#/components/responses/GetTask"
-        "500":
-          $ref: "#/components/responses/Error"
+        '200':
+          $ref: '#/components/responses/GetTask'
+        '500':
+          $ref: '#/components/responses/Error'
   /set_task:
     post:
       tags:
@@ -88,12 +88,12 @@ paths:
       description: Set task status and executor
       operationId: setTask
       requestBody:
-        $ref: "#/components/requestBodies/SetTask"
+        $ref: '#/components/requestBodies/SetTask'
       responses:
-        "200":
-          $ref: "#/components/responses/SetTask"
-        "500":
-          $ref: "#/components/responses/Error"
+        '200':
+          $ref: '#/components/responses/SetTask'
+        '500':
+          $ref: '#/components/responses/Error'
 components:
   schemas:
     User:
@@ -102,7 +102,7 @@ components:
         oid:
           type: string
           description: user ID
-          example: "100"
+          example: '100'
         firstName:
           type: string
           description: first name
@@ -122,7 +122,7 @@ components:
         userPhotoId:
           type: string
           description: user photo id
-          example: "123"
+          example: '123'
       xml:
         name: user
     TasksItem:
@@ -131,21 +131,21 @@ components:
         taskId:
           type: string
           description: task ID
-          example: "123"
+          example: '123'
         dueDate:
           type: string
           description: due date
-          example: "2024-01-01T00:00:00"
+          example: '2024-01-01T00:00:00'
         collateralType:
-          $ref: "#/components/schemas/Locale"
+          $ref: '#/components/schemas/Locale'
         pledgeOwner:
           type: string
           description: pledge owner
           example: Ivanov Ivan Ivanovich
         taskStatus:
-          $ref: "#/components/schemas/Locale"
+          $ref: '#/components/schemas/Locale'
         executor:
-          $ref: "#/components/schemas/User"
+          $ref: '#/components/schemas/User'
       xml:
         name: tasksItem
     TaskItem:
@@ -158,9 +158,9 @@ components:
             taskId:
               type: string
               description: task ID
-              example: "1234"
+              example: '1234'
             taskStatus:
-              $ref: "#/components/schemas/Locale"
+              $ref: '#/components/schemas/Locale'
             monitoringExecutor:
               type: string
               description: person, responsible for monitoring execution
@@ -168,7 +168,7 @@ components:
             createDate:
               type: string
               description: task create date
-              example: "2024-01-01T00:00:00"
+              example: '2024-01-01T00:00:00'
             executor:
               type: string
               description: task executor
@@ -178,7 +178,7 @@ components:
           description: collateral estimate
           properties:
             collateralType:
-              $ref: "#/components/schemas/Locale"
+              $ref: '#/components/schemas/Locale'
             prevEstimateValue:
               type: number
               description: previous estimate value
@@ -186,7 +186,7 @@ components:
             prevCreateDate:
               type: string
               description: previous create date
-              example: "2024-01-01T00:00:00"
+              example: '2024-01-01T00:00:00'
             curEstimateValue:
               type: number
               description: current estimate value
@@ -194,7 +194,7 @@ components:
             curCreateDate:
               type: string
               description: current create date
-              example: "2024-02-01T00:00:00"
+              example: '2024-02-01T00:00:00'
             commentary:
               type: string
               description: commentary
@@ -227,7 +227,7 @@ components:
         errorDate:
           type: string
           description: error create date
-          example: 2024-01-01T00:00:00
+          example: '2024-01-01T00:00:00'
       xml:
         name: error
     Locale:
@@ -275,7 +275,7 @@ components:
               taskId:
                 type: string
                 description: task ID
-                example: "123"
+                example: '123'
               statusCode:
                 type: string
                 description: code of the status needed
@@ -283,7 +283,7 @@ components:
               executorId:
                 type: string
                 description: executor (user) ID
-                example: "123"
+                example: '123'
             required:
               - taskId
               - statusCode
@@ -337,7 +337,7 @@ components:
                         description: auth type
                         example: login
                       user:
-                        $ref: "#/components/schemas/User"
+                        $ref: '#/components/schemas/User'
             xml:
               name: authResponse
     GetTasks:
@@ -350,9 +350,27 @@ components:
               error:
                 type: object
               payload:
-                type: array
-                items:
-                  $ref: "#/components/schemas/TasksItem"
+                type: object
+                properties:
+                  taskItems:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TasksItem'
+                  tableData:
+                    type: object
+                    properties:
+                      totalRows:
+                        type: integer
+                        description: total number of table rows
+                        example: 50
+                      totalPages:
+                        type: integer
+                        description: total number of pages
+                        example: 7
+                      currentPage:
+                        type: integer
+                        description: current table page
+                        example: 1
             xml:
               name: getTasksResponse
     GetTask:
@@ -365,7 +383,7 @@ components:
               error:
                 type: object
               payload:
-                $ref: "#/components/schemas/TaskItem"
+                $ref: '#/components/schemas/TaskItem'
             xml:
               name: getTaskResponse
     SetTask:
@@ -384,15 +402,11 @@ components:
                   taskId:
                     type: string
                     description: task ID
-                    example: "123"
-                  statusCode:
-                    type: string
-                    description: code of the status needed
-                    example: new
-                  executorId:
-                    type: string
-                    description: executor (user) ID
-                    example: "123"
+                    example: '123'
+                  status:
+                    $ref: '#/components/schemas/Locale'
+                  executor:
+                    $ref: '#/components/schemas/User'
             xml:
               name: setTaskResponse
     Error:
@@ -403,6 +417,6 @@ components:
             type: object
             properties:
               error:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
             xml:
               name: errorResponse
