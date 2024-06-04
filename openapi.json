@@ -124,6 +124,36 @@
         }
       }
     },
+    "/collateral": {
+      "get": {
+        "tags": [
+          "collaterals"
+        ],
+        "summary": "Get collateral by ID",
+        "description": "Get collateral details by its ID",
+        "operationId": "collateral",
+        "parameters": [
+          {
+            "name": "collateralId",
+            "in": "query",
+            "description": "collateral ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "123"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetCollateral"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/set_task": {
       "post": {
         "tags": [
@@ -254,6 +284,11 @@
             "type": "object",
             "description": "collateral estimate",
             "properties": {
+              "collateralId": {
+                "type": "string",
+                "description": "collateral ID",
+                "example": "123"
+              },
               "collateralType": {
                 "$ref": "#/components/schemas/Locale"
               },
@@ -310,6 +345,104 @@
           "name": "taskItem"
         }
       },
+      "Collateral": {
+        "type": "object",
+        "properties": {
+          "general": {
+            "type": "object",
+            "description": "general data",
+            "properties": {
+              "collateralId": {
+                "type": "string",
+                "description": "task ID",
+                "example": "1234"
+              },
+              "collateralType": {
+                "$ref": "#/components/schemas/Locale"
+              },
+              "collateralSubtype": {
+                "$ref": "#/components/schemas/Locale"
+              },
+              "collateralOwner": {
+                "type": "string",
+                "description": "collateral owner",
+                "example": "Ivanov Ivan Ivanovich"
+              },
+              "tin": {
+                "type": "string",
+                "description": "collateral owner TIN",
+                "example": "2542345233"
+              },
+              "estimateValue": {
+                "type": "number",
+                "description": "collateral estimate value",
+                "example": 2342.12
+              },
+              "estimateDate": {
+                "type": "string",
+                "description": "collateral estimate value",
+                "example": "2024-01-01T00:00:00"
+              },
+              "cadastralValue": {
+                "type": "number",
+                "description": "collateral cadastral value",
+                "example": 2342.12
+              },
+              "estimatorName": {
+                "type": "string",
+                "description": "collateral estimator company name",
+                "example": "Ivanov Ivan Ivanovich"
+              },
+              "estimatorTin": {
+                "type": "string",
+                "description": "collateral estimator TIN",
+                "example": "Ivanov Ivan Ivanovich"
+              }
+            }
+          },
+          "address": {
+            "type": "object",
+            "description": "address data",
+            "properties": {
+              "country": {
+                "$ref": "#/components/schemas/AddressItem"
+              },
+              "region": {
+                "$ref": "#/components/schemas/AddressItem"
+              },
+              "district": {
+                "$ref": "#/components/schemas/AddressItem"
+              }
+            }
+          },
+          "asoki": {
+            "type": "object",
+            "description": "asoki data",
+            "properties": {
+              "collateralStatus": {
+                "$ref": "#/components/schemas/Locale"
+              },
+              "propertyRightsDescription": {
+                "type": "string",
+                "description": "description of property rights",
+                "example": "some text here"
+              },
+              "car": {
+                "$ref": "#/components/schemas/AsokiCar"
+              },
+              "equipment": {
+                "$ref": "#/components/schemas/AsokiEquipment"
+              },
+              "immovable": {
+                "$ref": "#/components/schemas/AsokiImmovable"
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "collateral"
+        }
+      },
       "Error": {
         "type": "object",
         "properties": {
@@ -343,7 +476,171 @@
           }
         },
         "xml": {
-          "name": "error"
+          "name": "locale"
+        }
+      },
+      "AddressItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "address item code",
+            "example": "some code"
+          },
+          "name": {
+            "type": "string",
+            "description": "address item name",
+            "example": "some name"
+          }
+        },
+        "xml": {
+          "name": "locale"
+        }
+      },
+      "AsokiCar": {
+        "type": "object",
+        "properties": {
+          "carType": {
+            "type": "string",
+            "description": "car type",
+            "example": "car type"
+          },
+          "productionYear": {
+            "type": "string",
+            "description": "production year",
+            "example": "2024"
+          },
+          "carPower": {
+            "type": "string",
+            "description": "car power",
+            "example": "3523"
+          },
+          "engineNumber": {
+            "type": "string",
+            "description": "engine number",
+            "example": "kuyvfur"
+          },
+          "shassisNumber": {
+            "type": "string",
+            "description": "shassis number",
+            "example": "o87tviur"
+          },
+          "bodyNumber": {
+            "type": "string",
+            "description": "body number",
+            "example": "iybfc6ei7v"
+          },
+          "plateNumber": {
+            "type": "string",
+            "description": "plate number",
+            "example": "3КВУ34"
+          },
+          "country": {
+            "$ref": "#/components/schemas/Locale"
+          },
+          "brandString": {
+            "type": "string",
+            "description": "brand string",
+            "example": "Toyota"
+          },
+          "color": {
+            "type": "string",
+            "description": "car color",
+            "example": "red"
+          }
+        },
+        "xml": {
+          "name": "asokiCar"
+        }
+      },
+      "AsokiEquipment": {
+        "type": "object",
+        "properties": {
+          "factoryNumber": {
+            "type": "string",
+            "description": "factory number",
+            "example": "J8fsee6G"
+          },
+          "registrationNumber": {
+            "type": "string",
+            "description": "registration number",
+            "example": "12313321"
+          },
+          "commissioningDate": {
+            "type": "string",
+            "description": "commissioning date",
+            "example": "2024-01-01T00:00:00"
+          },
+          "inventoryNumber": {
+            "type": "string",
+            "description": "inventoryNumber",
+            "example": "iu6bR^RHB"
+          },
+          "productionDate": {
+            "type": "string",
+            "description": "production date",
+            "example": "2024-01-01T00:00:00"
+          },
+          "equipmentProducer": {
+            "type": "string",
+            "description": "equipment producer",
+            "example": "companyName"
+          }
+        },
+        "xml": {
+          "name": "asokiEquipment"
+        }
+      },
+      "AsokiImmovable": {
+        "type": "object",
+        "properties": {
+          "cadastralNumber": {
+            "type": "string",
+            "description": "cadastral number",
+            "example": "vdjkwbhvs"
+          },
+          "commissioningDate": {
+            "type": "string",
+            "description": "commissioning date",
+            "example": "2024-01-01T00:00:00"
+          },
+          "region": {
+            "$ref": "#/components/schemas/Locale"
+          },
+          "district": {
+            "$ref": "#/components/schemas/Locale"
+          },
+          "area": {
+            "type": "number",
+            "description": "total immovable area",
+            "example": 23412.12
+          },
+          "constructionArea": {
+            "type": "number",
+            "description": "area used for construction",
+            "example": 3412.12
+          },
+          "usedArea": {
+            "type": "number",
+            "description": "used area",
+            "example": 20000
+          },
+          "addressString": {
+            "type": "string",
+            "description": "address string",
+            "example": "address string"
+          },
+          "immovableCondition": {
+            "type": "string",
+            "description": "immovable condition",
+            "example": "condition"
+          },
+          "immovableType": {
+            "$ref": "#/components/schemas/Locale"
+          }
+        },
+        "xml": {
+          "name": "asokiImmovable"
         }
       }
     },
@@ -506,17 +803,17 @@
                     "tableData": {
                       "type": "object",
                       "properties": {
-                        "totalRows":{
+                        "totalRows": {
                           "type": "integer",
                           "description": "total number of table rows",
                           "example": 50
                         },
-                        "totalPages":{
+                        "totalPages": {
                           "type": "integer",
                           "description": "total number of pages",
                           "example": 7
                         },
-                        "currentPage":{
+                        "currentPage": {
                           "type": "integer",
                           "description": "current table page",
                           "example": 1
@@ -549,6 +846,217 @@
               },
               "xml": {
                 "name": "getTaskResponse"
+              }
+            }
+          }
+        }
+      },
+      "GetCollateral": {
+        "description": "successful response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object"
+                },
+                "payload": {
+                  "$ref": "#/components/schemas/Collateral"
+                }
+              },
+              "xml": {
+                "name": "getCollateralResponse"
+              }
+            },
+            "examples": {
+              "car": {
+                "value": {
+                  "error": {},
+                  "payload": {
+                    "general": {
+                      "collateralId": "1234",
+                      "collateralType": {
+                        "code": "localeCode",
+                        "value_": "localeValue"
+                      },
+                      "collateralSubtype": {
+                        "code": "localeCode",
+                        "value_": "localeValue"
+                      },
+                      "collateralOwner": "Ivanov Ivan Ivanovich",
+                      "tin": "2542345233",
+                      "estimateValue": 2342.12,
+                      "estimateDate": "2024-01-01T00:00:00",
+                      "cadastralValue": 2342.12,
+                      "estimatorName": "Ivanov Ivan Ivanovich",
+                      "estimatorTin": "Ivanov Ivan Ivanovich"
+                    },
+                    "address": {
+                      "country": {
+                        "code": "some code",
+                        "name": "some name"
+                      },
+                      "region": {
+                        "code": "some code",
+                        "name": "some name"
+                      },
+                      "district": {
+                        "code": "some code",
+                        "name": "some name"
+                      }
+                    },
+                    "asoki": {
+                      "collateralStatus": {
+                        "code": "localeCode",
+                        "value_": "localeValue"
+                      },
+                      "propertyRightsDescription": "some text here",
+                      "car": {
+                        "carType": "car type",
+                        "productionYear": "2024",
+                        "carPower": "3523",
+                        "engineNumber": "kuyvfur",
+                        "shassisNumber": "o87tviur",
+                        "bodyNumber": "iybfc6ei7v",
+                        "plateNumber": "3КВУ34",
+                        "country": {
+                          "code": "localeCode",
+                          "value_": "localeValue"
+                        },
+                        "brandString": "Toyota",
+                        "color": "red"
+                      },
+                      "equipment": {},
+                      "immovable": {}
+                    }
+                  }
+                }
+              },
+              "equipment": {
+                "value": {
+                  "error": {},
+                  "payload": {
+                    "general": {
+                      "collateralId": "1234",
+                      "collateralType": {
+                        "code": "localeCode",
+                        "value_": "localeValue"
+                      },
+                      "collateralSubtype": {
+                        "code": "localeCode",
+                        "value_": "localeValue"
+                      },
+                      "collateralOwner": "Ivanov Ivan Ivanovich",
+                      "tin": "2542345233",
+                      "estimateValue": 2342.12,
+                      "estimateDate": "2024-01-01T00:00:00",
+                      "cadastralValue": 2342.12,
+                      "estimatorName": "Ivanov Ivan Ivanovich",
+                      "estimatorTin": "Ivanov Ivan Ivanovich"
+                    },
+                    "address": {
+                      "country": {
+                        "code": "some code",
+                        "name": "some name"
+                      },
+                      "region": {
+                        "code": "some code",
+                        "name": "some name"
+                      },
+                      "district": {
+                        "code": "some code",
+                        "name": "some name"
+                      }
+                    },
+                    "asoki": {
+                      "collateralStatus": {
+                        "code": "localeCode",
+                        "value_": "localeValue"
+                      },
+                      "propertyRightsDescription": "some text here",
+                      "car": {},
+                      "equipment": {
+                        "factoryNumber": "J8fsee6G",
+                        "registrationNumber": "12313321",
+                        "commissioningDate": "2024-01-01T00:00:00",
+                        "inventoryNumber": "iu6bR^RHB",
+                        "productionDate": "2024-01-01T00:00:00",
+                        "equipmentProducer": "companyName"
+                      },
+                      "immovable": {}
+                    }
+                  }
+                }
+              },
+              "immovable": {
+                "value": {
+                  "error": {},
+                  "payload": {
+                    "general": {
+                      "collateralId": "1234",
+                      "collateralType": {
+                        "code": "localeCode",
+                        "value_": "localeValue"
+                      },
+                      "collateralSubtype": {
+                        "code": "localeCode",
+                        "value_": "localeValue"
+                      },
+                      "collateralOwner": "Ivanov Ivan Ivanovich",
+                      "tin": "2542345233",
+                      "estimateValue": 2342.12,
+                      "estimateDate": "2024-01-01T00:00:00",
+                      "cadastralValue": 2342.12,
+                      "estimatorName": "Ivanov Ivan Ivanovich",
+                      "estimatorTin": "Ivanov Ivan Ivanovich"
+                    },
+                    "address": {
+                      "country": {
+                        "code": "some code",
+                        "name": "some name"
+                      },
+                      "region": {
+                        "code": "some code",
+                        "name": "some name"
+                      },
+                      "district": {
+                        "code": "some code",
+                        "name": "some name"
+                      }
+                    },
+                    "asoki": {
+                      "collateralStatus": {
+                        "code": "localeCode",
+                        "value_": "localeValue"
+                      },
+                      "propertyRightsDescription": "some text here",
+                      "car": {},
+                      "equipment": {},
+                      "immovable": {
+                        "cadastralNumber": "vdjkwbhvs",
+                        "commissioningDate": "2024-01-01T00:00:00",
+                        "region": {
+                          "code": "localeCode",
+                          "value_": "localeValue"
+                        },
+                        "district": {
+                          "code": "localeCode",
+                          "value_": "localeValue"
+                        },
+                        "area": 23412.12,
+                        "constructionArea": 3412.12,
+                        "usedArea": 20000,
+                        "addressString": "address string",
+                        "immovableCondition": "condition",
+                        "immovableType": {
+                          "code": "localeCode",
+                          "value_": "localeValue"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }

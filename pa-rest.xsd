@@ -47,6 +47,7 @@
             <xs:element name="collateralType" type="locale" minOccurs="0" />
             <xs:element name="prevEstimateValue" type="xs:float" minOccurs="0" />
             <xs:element name="prevCreateDate" type="xs:string" minOccurs="0" />
+            <xs:element name="collateralId" type="xs:string" minOccurs="0" />
             <xs:element name="curEstimateValue" type="xs:float" minOccurs="0" />
             <xs:element name="curCreateDate" type="xs:string" minOccurs="0" />
             <xs:element name="commentary" type="xs:string" minOccurs="0" />
