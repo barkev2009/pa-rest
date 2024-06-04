@@ -739,7 +739,8 @@
               "type": "object",
               "properties": {
                 "error": {
-                  "type": "object"
+                  "type": "object",
+                  "example": null
                 },
                 "payload": {
                   "type": "object",
@@ -807,7 +808,8 @@
               "type": "object",
               "properties": {
                 "error": {
-                  "type": "object"
+                  "type": "object",
+                  "example": null
                 },
                 "payload": {
                   "type": "object",
@@ -856,7 +858,8 @@
               "type": "object",
               "properties": {
                 "error": {
-                  "type": "object"
+                  "type": "object",
+                  "example": null
                 },
                 "payload": {
                   "$ref": "#/components/schemas/TaskItem"
@@ -877,7 +880,8 @@
               "type": "object",
               "properties": {
                 "error": {
-                  "type": "object"
+                  "type": "object",
+                  "example": null
                 },
                 "payload": {
                   "type": "array",
@@ -901,7 +905,8 @@
               "type": "object",
               "properties": {
                 "error": {
-                  "type": "object"
+                  "type": "object",
+                  "example": null
                 },
                 "payload": {
                   "$ref": "#/components/schemas/Collateral"
@@ -914,7 +919,7 @@
             "examples": {
               "car": {
                 "value": {
-                  "error": {},
+                  "error": null,
                   "payload": {
                     "general": {
                       "collateralId": "1234",
@@ -969,15 +974,15 @@
                         "brandString": "Toyota",
                         "color": "red"
                       },
-                      "equipment": {},
-                      "immovable": {}
+                      "equipment": null,
+                      "immovable": null
                     }
                   }
                 }
               },
               "equipment": {
                 "value": {
-                  "error": {},
+                  "error": null,
                   "payload": {
                     "general": {
                       "collateralId": "1234",
@@ -1017,7 +1022,7 @@
                         "value_": "localeValue"
                       },
                       "propertyRightsDescription": "some text here",
-                      "car": {},
+                      "car": null,
                       "equipment": {
                         "factoryNumber": "J8fsee6G",
                         "registrationNumber": "12313321",
@@ -1026,14 +1031,14 @@
                         "productionDate": "2024-01-01T00:00:00",
                         "equipmentProducer": "companyName"
                       },
-                      "immovable": {}
+                      "immovable": null
                     }
                   }
                 }
               },
               "immovable": {
                 "value": {
-                  "error": {},
+                  "error": null,
                   "payload": {
                     "general": {
                       "collateralId": "1234",
@@ -1073,8 +1078,8 @@
                         "value_": "localeValue"
                       },
                       "propertyRightsDescription": "some text here",
-                      "car": {},
-                      "equipment": {},
+                      "car": null,
+                      "equipment": null,
                       "immovable": {
                         "cadastralNumber": "vdjkwbhvs",
                         "commissioningDate": "2024-01-01T00:00:00",
@@ -1113,7 +1118,7 @@
               "properties": {
                 "error": {
                   "type": "object",
-                  "example": {}
+                  "example": null
                 },
                 "payload": {
                   "type": "object",
