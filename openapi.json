@@ -94,6 +94,24 @@
         }
       }
     },
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all users",
+        "description": "Get all users for filtering tasks",
+        "operationId": "users",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetUsers"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/task": {
       "get": {
         "tags": [
@@ -846,6 +864,30 @@
               },
               "xml": {
                 "name": "getTaskResponse"
+              }
+            }
+          }
+        }
+      },
+      "GetUsers": {
+        "description": "successful response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object"
+                },
+                "payload": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              },
+              "xml": {
+                "name": "getUsersResponse"
               }
             }
           }
