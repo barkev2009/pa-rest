@@ -45,45 +45,16 @@
       }
     },
     "/tasks": {
-      "get": {
+      "post": {
         "tags": [
           "tasks"
         ],
         "summary": "Get all tasks",
         "description": "Get all tasks by user (with limit, offset and sorting/filter data)",
         "operationId": "tasks",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "query",
-            "description": "User ID",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "123"
-            }
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "description": "offset value",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "default": 0
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "limit value",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "default": 10
-            }
-          }
-        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Tasks"
+        },
         "responses": {
           "200": {
             "$ref": "#/components/responses/GetTasks"
@@ -479,6 +450,24 @@
           "name": "error"
         }
       },
+      "SortItem": {
+        "type": "object",
+        "properties": {
+          "columnName": {
+            "type": "string",
+            "description": "sort column name",
+            "example": "status"
+          },
+          "asc": {
+            "type": "boolean",
+            "description": "ascending order",
+            "example": true
+          }
+        },
+        "xml": {
+          "name": "sortItem"
+        }
+      },
       "Locale": {
         "type": "object",
         "properties": {
@@ -723,6 +712,69 @@
               ],
               "xml": {
                 "name": "setTaskRequest"
+              }
+            }
+          }
+        },
+        "required": true
+      },
+      "Tasks": {
+        "description": "Request for getting tasks data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "description": "user ID",
+                  "example": "123"
+                },
+                "offset": {
+                  "type": "integer",
+                  "description": "offset value",
+                  "example": 0
+                },
+                "limit": {
+                  "type": "integer",
+                  "description": "limit value",
+                  "example": 10
+                },
+                "filterData": {
+                  "type": "object",
+                  "properties": {
+                    "executors": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "executor ID",
+                        "example": "3121"
+                      }
+                    },
+                    "startDate": {
+                      "type": "string",
+                      "description": "filter start date",
+                      "example": "2024-01-01"
+                    },
+                    "endDate": {
+                      "type": "string",
+                      "description": "filter end date",
+                      "example": "2024-01-11"
+                    }
+                  }
+                },
+                "sortData": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SortItem"
+                  }
+                }
+              },
+              "required": [
+                "userId"
+              ],
+              "xml": {
+                "name": "tasksRequest"
               }
             }
           }
