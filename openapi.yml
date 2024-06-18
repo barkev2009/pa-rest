@@ -866,5 +866,8 @@ components:
             properties:
               error:
                 $ref: '#/components/schemas/Error'
+              payload:
+                type: object
+                example: null
             xml:
               name: errorResponse
