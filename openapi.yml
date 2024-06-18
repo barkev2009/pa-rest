@@ -11,6 +11,9 @@ tags:
     description: Getting collateral data
   - name: users
     description: Operations with users
+servers:
+  - url: http://fpc-uzpsb.fisgroup.ru:8080/platform/rs2/rest/endpoint
+    description: Сервер проекта УзПСБ
 paths:
   /auth:
     post:
