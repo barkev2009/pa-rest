@@ -4,7 +4,7 @@
     <xs:complexType name="error">
         <xs:sequence>
             <xs:element name="message" type="xs:string" minOccurs="0" />
-            <xs:element name="errorDate" type="xs:string" minOccurs="0" />
+            <xs:element name="error_date" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="locale">
@@ -13,82 +13,95 @@
             <xs:element name="value_" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
+    <xs:complexType name="code_name">
+        <xs:sequence>
+            <xs:element name="code" type="xs:string" minOccurs="1" />
+            <xs:element name="name" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
     <xs:complexType name="user">
         <xs:sequence>
             <xs:element name="oid" type="xs:string" minOccurs="1" />
-            <xs:element name="firstName" type="xs:string" minOccurs="0" />
-            <xs:element name="lastName" type="xs:string" minOccurs="0" />
-            <xs:element name="middleName" type="xs:string" minOccurs="0" />
+            <xs:element name="first_name" type="xs:string" minOccurs="0" />
+            <xs:element name="last_name" type="xs:string" minOccurs="0" />
+            <xs:element name="middle_name" type="xs:string" minOccurs="0" />
             <xs:element name="login" type="xs:string" minOccurs="0" />
-            <xs:element name="userPhotoId" type="xs:string" minOccurs="0" />
+            <xs:element name="user_photo_id" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="tasksItem">
+    <xs:complexType name="tasks_item">
         <xs:sequence>
-            <xs:element name="taskId" type="xs:string" minOccurs="1" />
-            <xs:element name="dueDate" type="xs:string" minOccurs="0" />
-            <xs:element name="collateralType" type="locale" minOccurs="0" />
-            <xs:element name="pledgeOwner" type="xs:string" minOccurs="0" />
-            <xs:element name="taskStatus" type="locale" minOccurs="0" />
+            <xs:element name="task_id" type="xs:string" minOccurs="1" />
+            <xs:element name="due_date" type="xs:string" minOccurs="0" />
+            <xs:element name="pledge_type" type="locale" minOccurs="0" />
+            <xs:element name="pledge_owner" type="xs:string" minOccurs="0" />
+            <xs:element name="task_status" type="locale" minOccurs="0" />
             <xs:element name="executor" type="user" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="general">
         <xs:sequence>
-            <xs:element name="taskId" type="xs:string" minOccurs="1" />
-            <xs:element name="taskStatus" type="locale" minOccurs="0" />
-            <xs:element name="monitoringExecutor" type="xs:string" minOccurs="0" />
-            <xs:element name="createDate" type="xs:string" minOccurs="0" />
+            <xs:element name="task_id" type="xs:string" minOccurs="1" />
+            <xs:element name="task_status" type="locale" minOccurs="0" />
+            <xs:element name="monitoring_executor" type="xs:string" minOccurs="0" />
+            <xs:element name="create_date" type="xs:string" minOccurs="0" />
             <xs:element name="executor" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="collateralEstimate">
+    <xs:complexType name="pledge_estimate">
         <xs:sequence>
-            <xs:element name="collateralType" type="locale" minOccurs="0" />
-            <xs:element name="prevEstimateValue" type="xs:float" minOccurs="0" />
-            <xs:element name="prevCreateDate" type="xs:string" minOccurs="0" />
-            <xs:element name="collateralId" type="xs:string" minOccurs="0" />
-            <xs:element name="curEstimateValue" type="xs:float" minOccurs="0" />
-            <xs:element name="curCreateDate" type="xs:string" minOccurs="0" />
+            <xs:element name="pledge_type" type="locale" minOccurs="0" />
+            <xs:element name="prev_estimate_value" type="xs:float" minOccurs="0" />
+            <xs:element name="prev_create_date" type="xs:string" minOccurs="0" />
+            <xs:element name="pledge_id" type="xs:string" minOccurs="0" />
+            <xs:element name="cur_estimate_value" type="xs:float" minOccurs="0" />
+            <xs:element name="cur_create_date" type="xs:string" minOccurs="0" />
             <xs:element name="commentary" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="contactData">
+    <xs:complexType name="contact_data">
         <xs:sequence>
-            <xs:element name="pledgerFullName" type="xs:string" minOccurs="0" />
-            <xs:element name="phoneNumber" type="xs:string" minOccurs="0" />
-            <xs:element name="pledgerAddress" type="xs:string" minOccurs="0" />
+            <xs:element name="pledger_full_name" type="xs:string" minOccurs="0" />
+            <xs:element name="phone_number" type="xs:string" minOccurs="0" />
+            <xs:element name="pledger_address" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="taskItem">
+    <xs:complexType name="task_item">
         <xs:sequence>
             <xs:element name="general" type="general" minOccurs="0" />
-            <xs:element name="collateralEstimate" type="collateralEstimate" minOccurs="0" />
-            <xs:element name="contactData" type="contactData" minOccurs="0" />
+            <xs:element name="pledge_estimate" type="pledge_estimate" minOccurs="0" />
+            <xs:element name="contact_data" type="contact_data" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="tokenData">
+    <xs:complexType name="token_data">
         <xs:sequence>
-            <xs:element name="accessToken" type="xs:string" minOccurs="0" />
-            <xs:element name="refreshToken" type="xs:string" minOccurs="0" />
+            <xs:element name="access_token" type="xs:string" minOccurs="0" />
+            <xs:element name="refresh_token" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="userData">
+    <xs:complexType name="user_data">
         <xs:sequence>
-            <xs:element name="mustChangePassword" type="xs:boolean" minOccurs="0" />
-            <xs:element name="passwordExpired" type="xs:boolean" minOccurs="0" />
-            <xs:element name="userBlocked" type="xs:boolean" minOccurs="0" />
-            <xs:element name="authType" type="xs:string" minOccurs="0" />
+            <xs:element name="must_change_password" type="xs:boolean" minOccurs="0" />
+            <xs:element name="password_expired" type="xs:boolean" minOccurs="0" />
+            <xs:element name="user_blocked" type="xs:boolean" minOccurs="0" />
+            <xs:element name="auth_type" type="xs:string" minOccurs="0" />
             <xs:element name="user" type="user" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="authResponsePayload">
+    <xs:complexType name="table_data">
         <xs:sequence>
-            <xs:element name="tokenData" type="tokenData" minOccurs="0" />
-            <xs:element name="userData" type="userData" minOccurs="0" />
+            <xs:element name="total_rows" type="xs:int" minOccurs="0" />
+            <xs:element name="total_pages" type="xs:int" minOccurs="0" />
+            <xs:element name="current_page" type="xs:int" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
-    <xs:element name="authRequest">
+    <xs:complexType name="auth_response_payload">
+        <xs:sequence>
+            <xs:element name="token_data" type="token_data" minOccurs="0" />
+            <xs:element name="user_data" type="user_data" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="auth_request">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="login" type="xs:string" minOccurs="1" />
@@ -96,12 +109,192 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="authResponse">
+    <xs:element name="auth_response">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="error" type="error" minOccurs="0" />
-                <xs:element name="payload" type="authResponsePayload" minOccurs="0" />
+                <xs:element name="payload" type="auth_response_payload" minOccurs="0" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <xs:element name="task_response">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="error" type="error" minOccurs="0" />
+                <xs:element name="payload" type="task_item" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="tasks_response_payload">
+        <xs:sequence>
+            <xs:element name="tasks_item" type="tasks_item" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="table_data" type="table_data" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="filter_data">
+        <xs:sequence>
+            <xs:element name="executors" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="startDate" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="endDate" type="xs:dateTime" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="sort_data">
+        <xs:sequence>
+            <xs:element name="column_name" type="xs:string" minOccurs="0" />
+            <xs:element name="asc" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="tasks_request">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user_id" type="xs:string" minOccurs="1" />
+                <xs:element name="offset" type="xs:int" minOccurs="1" />
+                <xs:element name="limit" type="xs:int" minOccurs="1" />
+                <xs:element name="filter_data" type="filter_data" minOccurs="1" />
+                <xs:element name="sort_data" type="sort_data" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="tasks_response">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="error" type="error" minOccurs="0" />
+                <xs:element name="payload" type="tasks_response_payload" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="set_task_request">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="task_id" type="xs:string" minOccurs="1" />
+                <xs:element name="statusCode" type="xs:string" minOccurs="1" />
+                <xs:element name="executorId" type="xs:string" minOccurs="1" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="set_tasks_response_payload">
+        <xs:sequence>
+            <xs:element name="tasks_id" type="xs:string" minOccurs="0" />
+            <xs:element name="status" type="locale" minOccurs="0" />
+            <xs:element name="executor" type="user" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="set_task_response">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="error" type="error" minOccurs="0" />
+                <xs:element name="payload" type="set_tasks_response_payload" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="general_pledge">
+        <xs:sequence>
+            <xs:element name="pledge_id" type="xs:string" minOccurs="0" />
+            <xs:element name="pledge_type" type="locale" minOccurs="0" />
+            <xs:element name="pledge_subtype" type="locale" minOccurs="0" />
+            <xs:element name="pledge_owner" type="xs:string" minOccurs="0" />
+            <xs:element name="tin" type="xs:string" minOccurs="0" />
+            <xs:element name="estimate_value" type="xs:float" minOccurs="0" />
+            <xs:element name="estimate_date" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="cadastral_value" type="xs:float" minOccurs="0" />
+            <xs:element name="estimator_name" type="xs:string" minOccurs="0" />
+            <xs:element name="estimator_tin" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="address">
+        <xs:sequence>
+            <xs:element name="country" type="code_name" minOccurs="0" />
+            <xs:element name="region" type="code_name" minOccurs="0" />
+            <xs:element name="district" type="code_name" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="car">
+        <xs:sequence>
+            <xs:element name="car_type" type="xs:string" minOccurs="0" />
+            <xs:element name="production_year" type="xs:string" minOccurs="0" />
+            <xs:element name="car_power" type="xs:string" minOccurs="0" />
+            <xs:element name="engine_number" type="xs:string" minOccurs="0" />
+            <xs:element name="shassis_number" type="xs:string" minOccurs="0" />
+            <xs:element name="body_number" type="xs:string" minOccurs="0" />
+            <xs:element name="plate_number" type="xs:string" minOccurs="0" />
+            <xs:element name="country" type="locale" minOccurs="0" />
+            <xs:element name="brand_string" type="xs:string" minOccurs="0" />
+            <xs:element name="color" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="equipment">
+        <xs:sequence>
+            <xs:element name="factory_number" type="xs:string" minOccurs="0" />
+            <xs:element name="registration_number" type="xs:string" minOccurs="0" />
+            <xs:element name="commissioning_date" type="xs:string" minOccurs="0" />
+            <xs:element name="inventory_number" type="xs:string" minOccurs="0" />
+            <xs:element name="production_date" type="xs:string" minOccurs="0" />
+            <xs:element name="equipment_producer" type="xs:string" minOccurs="0" />        
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="immovable">
+        <xs:sequence>
+            <xs:element name="cadastral_number" type="xs:string" minOccurs="0" />
+            <xs:element name="commissioning_date" type="xs:string" minOccurs="0" />
+            <xs:element name="region" type="locale" minOccurs="0" />
+            <xs:element name="district" type="locale" minOccurs="0" />
+            <xs:element name="area" type="xs:float" minOccurs="0" />
+            <xs:element name="construction_area" type="xs:float" minOccurs="0" />
+            <xs:element name="used_area" type="xs:float" minOccurs="0" />
+            <xs:element name="address_string" type="xs:string" minOccurs="0" />
+            <xs:element name="immovable_condition" type="xs:string" minOccurs="0" />
+            <xs:element name="immovable_type" type="locale" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="asoki">
+        <xs:sequence>
+            <xs:element name="pledge_status" type="locale" minOccurs="0" />
+            <xs:element name="property_rights_description" type="xs:string" minOccurs="0" />
+            <xs:element name="car" type="car" minOccurs="0" />
+            <xs:element name="equipment" type="equipment" minOccurs="0" />
+            <xs:element name="immovable" type="immovable" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="pledge_response_payload">
+        <xs:sequence>
+            <xs:element name="general" type="general_pledge" minOccurs="0" />
+            <xs:element name="address" type="address" minOccurs="0" />
+            <xs:element name="asoki" type="asoki" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="pledge_response">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="error" type="error" minOccurs="0" />
+                <xs:element name="payload" type="pledge_response_payload" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="users_response">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="error" type="error" minOccurs="0" />
+                <xs:element name="payload" type="user" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 </xs:schema>
