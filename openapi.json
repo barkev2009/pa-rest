@@ -14,8 +14,8 @@
       "description": "Task operations"
     },
     {
-      "name": "collaterals",
-      "description": "Getting collateral data"
+      "name": "pledges",
+      "description": "Getting pledge data"
     },
     {
       "name": "users",
@@ -119,19 +119,19 @@
         }
       }
     },
-    "/collateral": {
+    "/pledge": {
       "get": {
         "tags": [
-          "collaterals"
+          "pledges"
         ],
-        "summary": "Get collateral by ID",
-        "description": "Get collateral details by its ID",
-        "operationId": "collateral",
+        "summary": "Get pledge by ID",
+        "description": "Get pledge details by its ID",
+        "operationId": "pledge",
         "parameters": [
           {
-            "name": "collateralId",
+            "name": "pledgeId",
             "in": "query",
-            "description": "collateral ID",
+            "description": "pledge ID",
             "required": true,
             "schema": {
               "type": "string",
@@ -141,7 +141,7 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/GetCollateral"
+            "$ref": "#/components/responses/GetPledge"
           },
           "500": {
             "$ref": "#/components/responses/Error"
@@ -224,7 +224,7 @@
             "description": "due date",
             "example": "2024-01-01T00:00:00"
           },
-          "collateralType": {
+          "pledgeType": {
             "$ref": "#/components/schemas/Locale"
           },
           "pledgeOwner": {
@@ -275,16 +275,16 @@
               }
             }
           },
-          "collateralEstimate": {
+          "pledgeEstimate": {
             "type": "object",
-            "description": "collateral estimate",
+            "description": "pledge estimate",
             "properties": {
-              "collateralId": {
+              "pledgeId": {
                 "type": "string",
-                "description": "collateral ID",
+                "description": "pledge ID",
                 "example": "123"
               },
-              "collateralType": {
+              "pledgeType": {
                 "$ref": "#/components/schemas/Locale"
               },
               "prevEstimateValue": {
@@ -340,57 +340,57 @@
           "name": "taskItem"
         }
       },
-      "Collateral": {
+      "Pledge": {
         "type": "object",
         "properties": {
           "general": {
             "type": "object",
             "description": "general data",
             "properties": {
-              "collateralId": {
+              "pledgeId": {
                 "type": "string",
                 "description": "task ID",
                 "example": "1234"
               },
-              "collateralType": {
+              "pledgeType": {
                 "$ref": "#/components/schemas/Locale"
               },
-              "collateralSubtype": {
+              "pledgeSubtype": {
                 "$ref": "#/components/schemas/Locale"
               },
-              "collateralOwner": {
+              "pledgeOwner": {
                 "type": "string",
-                "description": "collateral owner",
+                "description": "pledge owner",
                 "example": "Ivanov Ivan Ivanovich"
               },
               "tin": {
                 "type": "string",
-                "description": "collateral owner TIN",
+                "description": "pledge owner TIN",
                 "example": "2542345233"
               },
               "estimateValue": {
                 "type": "number",
-                "description": "collateral estimate value",
+                "description": "pledge estimate value",
                 "example": 2342.12
               },
               "estimateDate": {
                 "type": "string",
-                "description": "collateral estimate value",
+                "description": "pledge estimate value",
                 "example": "2024-01-01T00:00:00"
               },
               "cadastralValue": {
                 "type": "number",
-                "description": "collateral cadastral value",
+                "description": "pledge cadastral value",
                 "example": 2342.12
               },
               "estimatorName": {
                 "type": "string",
-                "description": "collateral estimator company name",
+                "description": "pledge estimator company name",
                 "example": "Ivanov Ivan Ivanovich"
               },
               "estimatorTin": {
                 "type": "string",
-                "description": "collateral estimator TIN",
+                "description": "pledge estimator TIN",
                 "example": "Ivanov Ivan Ivanovich"
               }
             }
@@ -414,7 +414,7 @@
             "type": "object",
             "description": "asoki data",
             "properties": {
-              "collateralStatus": {
+              "pledgeStatus": {
                 "$ref": "#/components/schemas/Locale"
               },
               "propertyRightsDescription": {
@@ -435,7 +435,7 @@
           }
         },
         "xml": {
-          "name": "collateral"
+          "name": "pledge"
         }
       },
       "Error": {
@@ -955,7 +955,7 @@
           }
         }
       },
-      "GetCollateral": {
+      "GetPledge": {
         "description": "successful response",
         "content": {
           "application/json": {
@@ -967,11 +967,11 @@
                   "example": null
                 },
                 "payload": {
-                  "$ref": "#/components/schemas/Collateral"
+                  "$ref": "#/components/schemas/Pledge"
                 }
               },
               "xml": {
-                "name": "getCollateralResponse"
+                "name": "getPledgeResponse"
               }
             },
             "examples": {
@@ -980,16 +980,16 @@
                   "error": null,
                   "payload": {
                     "general": {
-                      "collateralId": "1234",
-                      "collateralType": {
+                      "pledgeId": "1234",
+                      "pledgeType": {
                         "code": "localeCode",
                         "value_": "localeValue"
                       },
-                      "collateralSubtype": {
+                      "pledgeSubtype": {
                         "code": "localeCode",
                         "value_": "localeValue"
                       },
-                      "collateralOwner": "Ivanov Ivan Ivanovich",
+                      "pledgeOwner": "Ivanov Ivan Ivanovich",
                       "tin": "2542345233",
                       "estimateValue": 2342.12,
                       "estimateDate": "2024-01-01T00:00:00",
@@ -1012,7 +1012,7 @@
                       }
                     },
                     "asoki": {
-                      "collateralStatus": {
+                      "pledgeStatus": {
                         "code": "localeCode",
                         "value_": "localeValue"
                       },
@@ -1043,16 +1043,16 @@
                   "error": null,
                   "payload": {
                     "general": {
-                      "collateralId": "1234",
-                      "collateralType": {
+                      "pledgeId": "1234",
+                      "pledgeType": {
                         "code": "localeCode",
                         "value_": "localeValue"
                       },
-                      "collateralSubtype": {
+                      "pledgeSubtype": {
                         "code": "localeCode",
                         "value_": "localeValue"
                       },
-                      "collateralOwner": "Ivanov Ivan Ivanovich",
+                      "pledgeOwner": "Ivanov Ivan Ivanovich",
                       "tin": "2542345233",
                       "estimateValue": 2342.12,
                       "estimateDate": "2024-01-01T00:00:00",
@@ -1075,7 +1075,7 @@
                       }
                     },
                     "asoki": {
-                      "collateralStatus": {
+                      "pledgeStatus": {
                         "code": "localeCode",
                         "value_": "localeValue"
                       },
@@ -1099,16 +1099,16 @@
                   "error": null,
                   "payload": {
                     "general": {
-                      "collateralId": "1234",
-                      "collateralType": {
+                      "pledgeId": "1234",
+                      "pledgeType": {
                         "code": "localeCode",
                         "value_": "localeValue"
                       },
-                      "collateralSubtype": {
+                      "pledgeSubtype": {
                         "code": "localeCode",
                         "value_": "localeValue"
                       },
-                      "collateralOwner": "Ivanov Ivan Ivanovich",
+                      "pledgeOwner": "Ivanov Ivan Ivanovich",
                       "tin": "2542345233",
                       "estimateValue": 2342.12,
                       "estimateDate": "2024-01-01T00:00:00",
@@ -1131,7 +1131,7 @@
                       }
                     },
                     "asoki": {
-                      "collateralStatus": {
+                      "pledgeStatus": {
                         "code": "localeCode",
                         "value_": "localeValue"
                       },
