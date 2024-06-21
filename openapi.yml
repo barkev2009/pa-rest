@@ -55,7 +55,7 @@ paths:
           $ref: '#/components/responses/GetUsers'
         '500':
           $ref: '#/components/responses/Error'
-  /task:
+  /task/{id}:
     get:
       tags:
         - tasks
@@ -63,8 +63,8 @@ paths:
       description: Get task details by task ID
       operationId: task
       parameters:
-        - name: taskId
-          in: query
+        - name: id
+          in: path
           description: Task ID
           required: true
           schema:
@@ -75,7 +75,7 @@ paths:
           $ref: '#/components/responses/GetTask'
         '500':
           $ref: '#/components/responses/Error'
-  /pledge:
+  /pledge/{id}:
     get:
       tags:
         - pledges
@@ -83,8 +83,8 @@ paths:
       description: Get pledge details by its ID
       operationId: pledge
       parameters:
-        - name: pledgeId
-          in: query
+        - name: id
+          in: path
           description: pledge ID
           required: true
           schema:

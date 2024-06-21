@@ -89,7 +89,7 @@
         }
       }
     },
-    "/task": {
+    "/task/{id}": {
       "get": {
         "tags": [
           "tasks"
@@ -99,8 +99,8 @@
         "operationId": "task",
         "parameters": [
           {
-            "name": "taskId",
-            "in": "query",
+            "name": "id",
+            "in": "path",
             "description": "Task ID",
             "required": true,
             "schema": {
@@ -119,7 +119,7 @@
         }
       }
     },
-    "/pledge": {
+    "/pledge/{id}": {
       "get": {
         "tags": [
           "pledges"
@@ -129,8 +129,8 @@
         "operationId": "pledge",
         "parameters": [
           {
-            "name": "pledgeId",
-            "in": "query",
+            "name": "id",
+            "in": "path",
             "description": "pledge ID",
             "required": true,
             "schema": {
