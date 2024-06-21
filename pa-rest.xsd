@@ -194,7 +194,6 @@
 
     <xs:complexType name="general_pledge">
         <xs:sequence>
-            <xs:element name="oid" type="xs:string" minOccurs="0" />
             <xs:element name="type" type="locale" minOccurs="0" />
             <xs:element name="sub_type" type="locale" minOccurs="0" />
             <xs:element name="owner" type="xs:string" minOccurs="0" />
@@ -268,6 +267,7 @@
 
     <xs:complexType name="pledge_response_payload">
         <xs:sequence>
+            <xs:element name="oid" type="xs:string" minOccurs="0" />
             <xs:element name="general" type="general_pledge" minOccurs="0" />
             <xs:element name="address" type="address" minOccurs="0" />
             <xs:element name="asoki" type="asoki" minOccurs="0" />

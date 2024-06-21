@@ -241,14 +241,14 @@ components:
     Pledge:
       type: object
       properties:
+        oid:
+          type: string
+          description: task ID
+          example: '1234'
         general:
           type: object
           description: general data
           properties:
-            oid:
-              type: string
-              description: task ID
-              example: '1234'
             type:
               $ref: '#/components/schemas/Locale'
             subType:
@@ -694,8 +694,8 @@ components:
               value:
                 error: null
                 payload:
+                  oid: '1234'
                   general:
-                    oid: '1234'
                     type:
                       code: localeCode
                       value: localeValue
@@ -743,8 +743,8 @@ components:
               value:
                 error: null
                 payload:
+                  oid: '1234'
                   general:
-                    oid: '1234'
                     type:
                       code: localeCode
                       value: localeValue
@@ -786,8 +786,8 @@ components:
               value:
                 error: null
                 payload:
+                  oid: '1234'
                   general:
-                    oid: '1234'
                     type:
                       code: localeCode
                       value: localeValue
