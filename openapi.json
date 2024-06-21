@@ -401,13 +401,13 @@
             "description": "address data",
             "properties": {
               "country": {
-                "$ref": "#/components/schemas/AddressItem"
+                "$ref": "#/components/schemas/Locale"
               },
               "region": {
-                "$ref": "#/components/schemas/AddressItem"
+                "$ref": "#/components/schemas/Locale"
               },
               "district": {
-                "$ref": "#/components/schemas/AddressItem"
+                "$ref": "#/components/schemas/Locale"
               }
             }
           },
@@ -487,24 +487,6 @@
             "type": "string",
             "description": "localized value",
             "example": "localeValue"
-          }
-        },
-        "xml": {
-          "name": "locale"
-        }
-      },
-      "AddressItem": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "address item code",
-            "example": "some code"
-          },
-          "name": {
-            "type": "string",
-            "description": "address item name",
-            "example": "some name"
           }
         },
         "xml": {
@@ -996,15 +978,15 @@
                     "address": {
                       "country": {
                         "code": "some code",
-                        "name": "some name"
+                        "value": "some name"
                       },
                       "region": {
                         "code": "some code",
-                        "name": "some name"
+                        "value": "some name"
                       },
                       "district": {
                         "code": "some code",
-                        "name": "some name"
+                        "value": "some name"
                       }
                     },
                     "asoki": {
@@ -1059,15 +1041,15 @@
                     "address": {
                       "country": {
                         "code": "some code",
-                        "name": "some name"
+                        "value": "some name"
                       },
                       "region": {
                         "code": "some code",
-                        "name": "some name"
+                        "value": "some name"
                       },
                       "district": {
                         "code": "some code",
-                        "name": "some name"
+                        "value": "some name"
                       }
                     },
                     "asoki": {
@@ -1115,15 +1097,15 @@
                     "address": {
                       "country": {
                         "code": "some code",
-                        "name": "some name"
+                        "value": "some name"
                       },
                       "region": {
                         "code": "some code",
-                        "name": "some name"
+                        "value": "some name"
                       },
                       "district": {
                         "code": "some code",
-                        "name": "some name"
+                        "value": "some name"
                       }
                     },
                     "asoki": {

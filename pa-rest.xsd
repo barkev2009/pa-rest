@@ -13,12 +13,6 @@
             <xs:element name="value" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="code_name">
-        <xs:sequence>
-            <xs:element name="code" type="xs:string" minOccurs="1" />
-            <xs:element name="name" type="xs:string" minOccurs="0" />
-        </xs:sequence>
-    </xs:complexType>
     <xs:complexType name="user">
         <xs:sequence>
             <xs:element name="oid" type="xs:string" minOccurs="1" />
@@ -155,7 +149,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="tasks_response">
         <xs:complexType>
             <xs:sequence>
@@ -208,9 +202,9 @@
 
     <xs:complexType name="address">
         <xs:sequence>
-            <xs:element name="country" type="code_name" minOccurs="0" />
-            <xs:element name="region" type="code_name" minOccurs="0" />
-            <xs:element name="district" type="code_name" minOccurs="0" />
+            <xs:element name="country" type="locale" minOccurs="0" />
+            <xs:element name="region" type="locale" minOccurs="0" />
+            <xs:element name="district" type="locale" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
 
@@ -236,7 +230,7 @@
             <xs:element name="commissioning_date" type="xs:string" minOccurs="0" />
             <xs:element name="inventory_number" type="xs:string" minOccurs="0" />
             <xs:element name="production_date" type="xs:string" minOccurs="0" />
-            <xs:element name="producer" type="xs:string" minOccurs="0" />        
+            <xs:element name="producer" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
 
@@ -287,7 +281,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="error" type="error" minOccurs="0" />
-                <xs:element name="payload" type="user" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="payload" type="user" minOccurs="0" maxOccurs="unbounded" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
