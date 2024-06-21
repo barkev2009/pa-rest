@@ -214,7 +214,7 @@
       "TasksItem": {
         "type": "object",
         "properties": {
-          "taskId": {
+          "oid": {
             "type": "string",
             "description": "task ID",
             "example": "123"
@@ -224,19 +224,21 @@
             "description": "due date",
             "example": "2024-01-01T00:00:00"
           },
-          "pledgeType": {
+          "type": {
             "$ref": "#/components/schemas/Locale"
           },
-          "pledgeOwner": {
+          "owner": {
             "type": "string",
             "description": "pledge owner",
             "example": "Ivanov Ivan Ivanovich"
           },
-          "taskStatus": {
+          "status": {
             "$ref": "#/components/schemas/Locale"
           },
           "executor": {
-            "$ref": "#/components/schemas/User"
+            "type": "string",
+            "description": "task executor",
+            "example": "Ivanov Ivan Ivanovich"
           }
         },
         "xml": {
@@ -246,48 +248,47 @@
       "TaskItem": {
         "type": "object",
         "properties": {
-          "general": {
-            "type": "object",
-            "description": "general data",
-            "properties": {
-              "taskId": {
-                "type": "string",
-                "description": "task ID",
-                "example": "1234"
-              },
-              "taskStatus": {
-                "$ref": "#/components/schemas/Locale"
-              },
-              "monitoringExecutor": {
-                "type": "string",
-                "description": "person, responsible for monitoring execution",
-                "example": "Ivanov Ivan Ivanovich"
-              },
-              "createDate": {
-                "type": "string",
-                "description": "task create date",
-                "example": "2024-01-01T00:00:00"
-              },
-              "executor": {
-                "type": "string",
-                "description": "task executor",
-                "example": "Ivanov Ivan Ivanovich"
-              }
-            }
+          "oid": {
+            "type": "string",
+            "description": "task ID",
+            "example": "1234"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Locale"
+          },
+          "monitoringExecutor": {
+            "type": "string",
+            "description": "person, responsible for monitoring execution",
+            "example": "Ivanov Ivan Ivanovich"
+          },
+          "createDate": {
+            "type": "string",
+            "description": "task create date",
+            "example": "2024-01-01T00:00:00"
+          },
+          "dueDate": {
+            "type": "string",
+            "description": "task due date",
+            "example": "2024-01-01T00:00:00"
+          },
+          "executor": {
+            "type": "string",
+            "description": "task executor",
+            "example": "Ivanov Ivan Ivanovich"
           },
           "pledgeEstimate": {
             "type": "object",
             "description": "pledge estimate",
             "properties": {
-              "pledgeId": {
+              "oid": {
                 "type": "string",
                 "description": "pledge ID",
                 "example": "123"
               },
-              "pledgeType": {
+              "type": {
                 "$ref": "#/components/schemas/Locale"
               },
-              "prevEstimateValue": {
+              "prevValue": {
                 "type": "number",
                 "description": "previous estimate value",
                 "example": 75.97
@@ -297,7 +298,7 @@
                 "description": "previous create date",
                 "example": "2024-01-01T00:00:00"
               },
-              "curEstimateValue": {
+              "curValue": {
                 "type": "number",
                 "description": "current estimate value",
                 "example": 175.97
@@ -314,11 +315,11 @@
               }
             }
           },
-          "contactData": {
+          "pledgerContactData": {
             "type": "object",
             "description": "contact data",
             "properties": {
-              "pledgerFullName": {
+              "fullName": {
                 "type": "string",
                 "description": "pledger full name",
                 "example": "Ivanov Ivan Ivanovich"
@@ -328,7 +329,7 @@
                 "description": "phone number",
                 "example": "+7-960-444-44-55"
               },
-              "pledgerAddress": {
+              "address": {
                 "type": "string",
                 "description": "pledger address",
                 "example": "default address"
@@ -347,18 +348,18 @@
             "type": "object",
             "description": "general data",
             "properties": {
-              "pledgeId": {
+              "oid": {
                 "type": "string",
                 "description": "task ID",
                 "example": "1234"
               },
-              "pledgeType": {
+              "type": {
                 "$ref": "#/components/schemas/Locale"
               },
-              "pledgeSubtype": {
+              "subType": {
                 "$ref": "#/components/schemas/Locale"
               },
-              "pledgeOwner": {
+              "owner": {
                 "type": "string",
                 "description": "pledge owner",
                 "example": "Ivanov Ivan Ivanovich"
@@ -414,7 +415,7 @@
             "type": "object",
             "description": "asoki data",
             "properties": {
-              "pledgeStatus": {
+              "status": {
                 "$ref": "#/components/schemas/Locale"
               },
               "propertyRightsDescription": {
@@ -482,7 +483,7 @@
             "description": "locale code",
             "example": "localeCode"
           },
-          "value_": {
+          "value": {
             "type": "string",
             "description": "localized value",
             "example": "localeValue"
@@ -731,11 +732,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "userId": {
-                  "type": "string",
-                  "description": "user ID",
-                  "example": "123"
-                },
                 "offset": {
                   "type": "integer",
                   "description": "offset value",
@@ -980,16 +976,16 @@
                   "error": null,
                   "payload": {
                     "general": {
-                      "pledgeId": "1234",
-                      "pledgeType": {
+                      "oid": "1234",
+                      "type": {
                         "code": "localeCode",
-                        "value_": "localeValue"
+                        "value": "localeValue"
                       },
-                      "pledgeSubtype": {
+                      "subType": {
                         "code": "localeCode",
-                        "value_": "localeValue"
+                        "value": "localeValue"
                       },
-                      "pledgeOwner": "Ivanov Ivan Ivanovich",
+                      "owner": "Ivanov Ivan Ivanovich",
                       "tin": "2542345233",
                       "estimateValue": 2342.12,
                       "estimateDate": "2024-01-01T00:00:00",
@@ -1012,22 +1008,22 @@
                       }
                     },
                     "asoki": {
-                      "pledgeStatus": {
+                      "status": {
                         "code": "localeCode",
-                        "value_": "localeValue"
+                        "value": "localeValue"
                       },
                       "propertyRightsDescription": "some text here",
                       "car": {
-                        "carType": "car type",
+                        "type": "car type",
                         "productionYear": "2024",
-                        "carPower": "3523",
+                        "power": "3523",
                         "engineNumber": "kuyvfur",
                         "shassisNumber": "o87tviur",
                         "bodyNumber": "iybfc6ei7v",
                         "plateNumber": "3КВУ34",
                         "country": {
                           "code": "localeCode",
-                          "value_": "localeValue"
+                          "value": "localeValue"
                         },
                         "brandString": "Toyota",
                         "color": "red"
@@ -1043,14 +1039,14 @@
                   "error": null,
                   "payload": {
                     "general": {
-                      "pledgeId": "1234",
-                      "pledgeType": {
+                      "oid": "1234",
+                      "type": {
                         "code": "localeCode",
-                        "value_": "localeValue"
+                        "value": "localeValue"
                       },
-                      "pledgeSubtype": {
+                      "subType": {
                         "code": "localeCode",
-                        "value_": "localeValue"
+                        "value": "localeValue"
                       },
                       "pledgeOwner": "Ivanov Ivan Ivanovich",
                       "tin": "2542345233",
@@ -1077,7 +1073,7 @@
                     "asoki": {
                       "pledgeStatus": {
                         "code": "localeCode",
-                        "value_": "localeValue"
+                        "value": "localeValue"
                       },
                       "propertyRightsDescription": "some text here",
                       "car": null,
@@ -1087,7 +1083,7 @@
                         "commissioningDate": "2024-01-01T00:00:00",
                         "inventoryNumber": "iu6bR^RHB",
                         "productionDate": "2024-01-01T00:00:00",
-                        "equipmentProducer": "companyName"
+                        "producer": "companyName"
                       },
                       "immovable": null
                     }
@@ -1099,16 +1095,16 @@
                   "error": null,
                   "payload": {
                     "general": {
-                      "pledgeId": "1234",
-                      "pledgeType": {
+                      "oid": "1234",
+                      "type": {
                         "code": "localeCode",
-                        "value_": "localeValue"
+                        "value": "localeValue"
                       },
-                      "pledgeSubtype": {
+                      "subType": {
                         "code": "localeCode",
-                        "value_": "localeValue"
+                        "value": "localeValue"
                       },
-                      "pledgeOwner": "Ivanov Ivan Ivanovich",
+                      "owner": "Ivanov Ivan Ivanovich",
                       "tin": "2542345233",
                       "estimateValue": 2342.12,
                       "estimateDate": "2024-01-01T00:00:00",
@@ -1131,9 +1127,9 @@
                       }
                     },
                     "asoki": {
-                      "pledgeStatus": {
+                      "status": {
                         "code": "localeCode",
-                        "value_": "localeValue"
+                        "value": "localeValue"
                       },
                       "propertyRightsDescription": "some text here",
                       "car": null,
@@ -1143,20 +1139,20 @@
                         "commissioningDate": "2024-01-01T00:00:00",
                         "region": {
                           "code": "localeCode",
-                          "value_": "localeValue"
+                          "value": "localeValue"
                         },
                         "district": {
                           "code": "localeCode",
-                          "value_": "localeValue"
+                          "value": "localeValue"
                         },
                         "area": 23412.12,
                         "constructionArea": 3412.12,
                         "usedArea": 20000,
                         "addressString": "address string",
-                        "immovableCondition": "condition",
-                        "immovableType": {
+                        "condition": "condition",
+                        "type": {
                           "code": "localeCode",
-                          "value_": "localeValue"
+                          "value": "localeValue"
                         }
                       }
                     }

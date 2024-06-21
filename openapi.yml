@@ -23,12 +23,12 @@ paths:
       description: Get JWT-token (access and refresh)
       operationId: auth
       requestBody:
-        $ref: "#/components/requestBodies/Auth"
+        $ref: '#/components/requestBodies/Auth'
       responses:
-        "200":
-          $ref: "#/components/responses/Auth"
-        "500":
-          $ref: "#/components/responses/Error"
+        '200':
+          $ref: '#/components/responses/Auth'
+        '500':
+          $ref: '#/components/responses/Error'
   /tasks:
     post:
       tags:
@@ -37,12 +37,12 @@ paths:
       description: Get all tasks by user (with limit, offset and sorting/filter data)
       operationId: tasks
       requestBody:
-        $ref: "#/components/requestBodies/Tasks"
+        $ref: '#/components/requestBodies/Tasks'
       responses:
-        "200":
-          $ref: "#/components/responses/GetTasks"
-        "500":
-          $ref: "#/components/responses/Error"
+        '200':
+          $ref: '#/components/responses/GetTasks'
+        '500':
+          $ref: '#/components/responses/Error'
   /users:
     get:
       tags:
@@ -51,10 +51,10 @@ paths:
       description: Get all users for filtering tasks
       operationId: users
       responses:
-        "200":
-          $ref: "#/components/responses/GetUsers"
-        "500":
-          $ref: "#/components/responses/Error"
+        '200':
+          $ref: '#/components/responses/GetUsers'
+        '500':
+          $ref: '#/components/responses/Error'
   /task:
     get:
       tags:
@@ -69,12 +69,12 @@ paths:
           required: true
           schema:
             type: string
-            default: "123"
+            default: '123'
       responses:
-        "200":
-          $ref: "#/components/responses/GetTask"
-        "500":
-          $ref: "#/components/responses/Error"
+        '200':
+          $ref: '#/components/responses/GetTask'
+        '500':
+          $ref: '#/components/responses/Error'
   /pledge:
     get:
       tags:
@@ -89,12 +89,12 @@ paths:
           required: true
           schema:
             type: string
-            default: "123"
+            default: '123'
       responses:
-        "200":
-          $ref: "#/components/responses/GetPledge"
-        "500":
-          $ref: "#/components/responses/Error"
+        '200':
+          $ref: '#/components/responses/GetPledge'
+        '500':
+          $ref: '#/components/responses/Error'
   /set_task:
     post:
       tags:
@@ -103,12 +103,12 @@ paths:
       description: Set task status and executor
       operationId: setTask
       requestBody:
-        $ref: "#/components/requestBodies/SetTask"
+        $ref: '#/components/requestBodies/SetTask'
       responses:
-        "200":
-          $ref: "#/components/responses/SetTask"
-        "500":
-          $ref: "#/components/responses/Error"
+        '200':
+          $ref: '#/components/responses/SetTask'
+        '500':
+          $ref: '#/components/responses/Error'
 components:
   schemas:
     User:
@@ -117,7 +117,7 @@ components:
         oid:
           type: string
           description: user ID
-          example: "100"
+          example: '100'
         firstName:
           type: string
           description: first name
@@ -137,92 +137,94 @@ components:
         userPhotoId:
           type: string
           description: user photo id
-          example: "123"
+          example: '123'
       xml:
         name: user
     TasksItem:
       type: object
       properties:
-        taskId:
+        oid:
           type: string
           description: task ID
-          example: "123"
+          example: '123'
         dueDate:
           type: string
           description: due date
-          example: "2024-01-01T00:00:00"
-        pledgeType:
-          $ref: "#/components/schemas/Locale"
-        pledgeOwner:
+          example: '2024-01-01T00:00:00'
+        type:
+          $ref: '#/components/schemas/Locale'
+        owner:
           type: string
           description: pledge owner
           example: Ivanov Ivan Ivanovich
-        taskStatus:
-          $ref: "#/components/schemas/Locale"
+        status:
+          $ref: '#/components/schemas/Locale'
         executor:
-          $ref: "#/components/schemas/User"
+          type: string
+          description: task executor
+          example: Ivanov Ivan Ivanovich
       xml:
         name: tasksItem
     TaskItem:
       type: object
       properties:
-        general:
-          type: object
-          description: general data
-          properties:
-            taskId:
-              type: string
-              description: task ID
-              example: "1234"
-            taskStatus:
-              $ref: "#/components/schemas/Locale"
-            monitoringExecutor:
-              type: string
-              description: person, responsible for monitoring execution
-              example: Ivanov Ivan Ivanovich
-            createDate:
-              type: string
-              description: task create date
-              example: "2024-01-01T00:00:00"
-            executor:
-              type: string
-              description: task executor
-              example: Ivanov Ivan Ivanovich
+        oid:
+          type: string
+          description: task ID
+          example: '1234'
+        status:
+          $ref: '#/components/schemas/Locale'
+        monitoringExecutor:
+          type: string
+          description: person, responsible for monitoring execution
+          example: Ivanov Ivan Ivanovich
+        createDate:
+          type: string
+          description: task create date
+          example: '2024-01-01T00:00:00'
+        dueDate:
+          type: string
+          description: task due date
+          example: '2024-01-01T00:00:00'
+        executor:
+          type: string
+          description: task executor
+          example: Ivanov Ivan Ivanovich
         pledgeEstimate:
           type: object
           description: pledge estimate
           properties:
-            pledgeId:
+            oid:
               type: string
               description: pledge ID
-              example: "123"
-            pledgeType:
-              $ref: "#/components/schemas/Locale"
-            prevEstimateValue:
+              example: '123'
+            type:
+              $ref: '#/components/schemas/Locale'
+            prevValue:
               type: number
               description: previous estimate value
               example: 75.97
             prevCreateDate:
               type: string
               description: previous create date
-              example: "2024-01-01T00:00:00"
-            curEstimateValue:
+              example: '2024-01-01T00:00:00'
+            curValue:
               type: number
               description: current estimate value
               example: 175.97
             curCreateDate:
               type: string
               description: current create date
-              example: "2024-02-01T00:00:00"
+              example: '2024-02-01T00:00:00'
             commentary:
               type: string
               description: commentary
               example: default comment
-        contactData:
+        pledgerContactData:
           type: object
           description: contact data
           properties:
-            pledgerFullName:
+            fullName:
               type: string
               description: pledger full name
               example: Ivanov Ivan Ivanovich
@@ -230,7 +232,7 @@ components:
               type: string
               description: phone number
               example: +7-960-444-44-55
-            pledgerAddress:
+            address:
               type: string
               description: pledger address
               example: default address
@@ -243,22 +245,22 @@ components:
           type: object
           description: general data
           properties:
-            pledgeId:
+            oid:
               type: string
               description: task ID
-              example: "1234"
-            pledgeType:
-              $ref: "#/components/schemas/Locale"
-            pledgeSubtype:
-              $ref: "#/components/schemas/Locale"
-            pledgeOwner:
+              example: '1234'
+            type:
+              $ref: '#/components/schemas/Locale'
+            subType:
+              $ref: '#/components/schemas/Locale'
+            owner:
               type: string
               description: pledge owner
               example: Ivanov Ivan Ivanovich
             tin:
               type: string
               description: pledge owner TIN
-              example: "2542345233"
+              example: '2542345233'
             estimateValue:
               type: number
               description: pledge estimate value
@@ -266,7 +268,7 @@ components:
             estimateDate:
               type: string
               description: pledge estimate value
-              example: "2024-01-01T00:00:00"
+              example: '2024-01-01T00:00:00'
             cadastralValue:
               type: number
               description: pledge cadastral value
@@ -284,27 +286,27 @@ components:
           description: address data
           properties:
             country:
-              $ref: "#/components/schemas/AddressItem"
+              $ref: '#/components/schemas/AddressItem'
             region:
-              $ref: "#/components/schemas/AddressItem"
+              $ref: '#/components/schemas/AddressItem'
             district:
-              $ref: "#/components/schemas/AddressItem"
+              $ref: '#/components/schemas/AddressItem'
         asoki:
           type: object
           description: asoki data
           properties:
-            pledgeStatus:
-              $ref: "#/components/schemas/Locale"
+            status:
+              $ref: '#/components/schemas/Locale'
             propertyRightsDescription:
               type: string
               description: description of property rights
               example: some text here
             car:
-              $ref: "#/components/schemas/AsokiCar"
+              $ref: '#/components/schemas/AsokiCar'
             equipment:
-              $ref: "#/components/schemas/AsokiEquipment"
+              $ref: '#/components/schemas/AsokiEquipment'
             immovable:
-              $ref: "#/components/schemas/AsokiImmovable"
+              $ref: '#/components/schemas/AsokiImmovable'
       xml:
         name: pledge
     Error:
@@ -317,7 +319,7 @@ components:
         errorDate:
           type: string
           description: error create date
-          example: "2024-01-01T00:00:00"
+          example: '2024-01-01T00:00:00'
       xml:
         name: error
     SortItem:
@@ -340,7 +342,7 @@ components:
           type: string
           description: locale code
           example: localeCode
-        value_:
+        value:
           type: string
           description: localized value
           example: localeValue
@@ -369,11 +371,11 @@ components:
         productionYear:
           type: string
           description: production year
-          example: "2024"
+          example: '2024'
         carPower:
           type: string
           description: car power
-          example: "3523"
+          example: '3523'
         engineNumber:
           type: string
           description: engine number
@@ -391,7 +393,7 @@ components:
           description: plate number
           example: 3КВУ34
         country:
-          $ref: "#/components/schemas/Locale"
+          $ref: '#/components/schemas/Locale'
         brandString:
           type: string
           description: brand string
@@ -412,11 +414,11 @@ components:
         registrationNumber:
           type: string
           description: registration number
-          example: "12313321"
+          example: '12313321'
         commissioningDate:
           type: string
           description: commissioning date
-          example: "2024-01-01T00:00:00"
+          example: '2024-01-01T00:00:00'
         inventoryNumber:
           type: string
           description: inventoryNumber
@@ -424,7 +426,7 @@ components:
         productionDate:
           type: string
           description: production date
-          example: "2024-01-01T00:00:00"
+          example: '2024-01-01T00:00:00'
         equipmentProducer:
           type: string
           description: equipment producer
@@ -441,11 +443,11 @@ components:
         commissioningDate:
           type: string
           description: commissioning date
-          example: "2024-01-01T00:00:00"
+          example: '2024-01-01T00:00:00'
         region:
-          $ref: "#/components/schemas/Locale"
+          $ref: '#/components/schemas/Locale'
         district:
-          $ref: "#/components/schemas/Locale"
+          $ref: '#/components/schemas/Locale'
         area:
           type: number
           description: total immovable area
@@ -467,7 +469,7 @@ components:
           description: immovable condition
           example: condition
         immovableType:
-          $ref: "#/components/schemas/Locale"
+          $ref: '#/components/schemas/Locale'
       xml:
         name: asokiImmovable
   requestBodies:
@@ -502,7 +504,7 @@ components:
               taskId:
                 type: string
                 description: task ID
-                example: "123"
+                example: '123'
               statusCode:
                 type: string
                 description: code of the status needed
@@ -510,7 +512,7 @@ components:
               executorId:
                 type: string
                 description: executor (user) ID
-                example: "123"
+                example: '123'
             required:
               - taskId
               - statusCode
@@ -525,10 +527,6 @@ components:
           schema:
             type: object
             properties:
-              userId:
-                type: string
-                description: user ID
-                example: "123"
               offset:
                 type: integer
                 description: offset value
@@ -545,19 +543,19 @@ components:
                     items:
                       type: string
                       description: executor ID
-                      example: "3121"
+                      example: '3121'
                   startDate:
                     type: string
                     description: filter start date
-                    example: "2024-01-01"
+                    example: '2024-01-01'
                   endDate:
                     type: string
                     description: filter end date
-                    example: "2024-01-11"
+                    example: '2024-01-11'
               sortData:
                 type: array
                 items:
-                  $ref: "#/components/schemas/SortItem"
+                  $ref: '#/components/schemas/SortItem'
             required:
               - userId
             xml:
@@ -610,7 +608,7 @@ components:
                         description: auth type
                         example: login
                       user:
-                        $ref: "#/components/schemas/User"
+                        $ref: '#/components/schemas/User'
             xml:
               name: authResponse
     GetTasks:
@@ -629,7 +627,7 @@ components:
                   taskItems:
                     type: array
                     items:
-                      $ref: "#/components/schemas/TasksItem"
+                      $ref: '#/components/schemas/TasksItem'
                   tableData:
                     type: object
                     properties:
@@ -658,7 +656,7 @@ components:
                 type: object
                 example: null
               payload:
-                $ref: "#/components/schemas/TaskItem"
+                $ref: '#/components/schemas/TaskItem'
             xml:
               name: getTaskResponse
     GetUsers:
@@ -674,7 +672,7 @@ components:
               payload:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
+                  $ref: '#/components/schemas/User'
             xml:
               name: getUsersResponse
     GetPledge:
@@ -688,7 +686,7 @@ components:
                 type: object
                 example: null
               payload:
-                $ref: "#/components/schemas/Pledge"
+                $ref: '#/components/schemas/Pledge'
             xml:
               name: getPledgeResponse
           examples:
@@ -697,17 +695,17 @@ components:
                 error: null
                 payload:
                   general:
-                    pledgeId: "1234"
-                    pledgeType:
+                    oid: '1234'
+                    type:
                       code: localeCode
-                      value_: localeValue
-                    pledgeSubtype:
+                      value: localeValue
+                    subType:
                       code: localeCode
-                      value_: localeValue
-                    pledgeOwner: Ivanov Ivan Ivanovich
-                    tin: "2542345233"
+                      value: localeValue
+                    owner: Ivanov Ivan Ivanovich
+                    tin: '2542345233'
                     estimateValue: 2342.12
-                    estimateDate: "2024-01-01T00:00:00"
+                    estimateDate: '2024-01-01T00:00:00'
                     cadastralValue: 2342.12
                     estimatorName: Ivanov Ivan Ivanovich
                     estimatorTin: Ivanov Ivan Ivanovich
@@ -722,21 +720,21 @@ components:
                       code: some code
                       name: some name
                   asoki:
-                    pledgeStatus:
+                    status:
                       code: localeCode
-                      value_: localeValue
+                      value: localeValue
                     propertyRightsDescription: some text here
                     car:
-                      carType: car type
-                      productionYear: "2024"
-                      carPower: "3523"
+                      type: car type
+                      productionYear: '2024'
+                      power: '3523'
                       engineNumber: kuyvfur
                       shassisNumber: o87tviur
                       bodyNumber: iybfc6ei7v
                       plateNumber: 3КВУ34
                       country:
                         code: localeCode
-                        value_: localeValue
+                        value: localeValue
                       brandString: Toyota
                       color: red
                     equipment: null
@@ -746,17 +744,17 @@ components:
                 error: null
                 payload:
                   general:
-                    pledgeId: "1234"
-                    pledgeType:
+                    oid: '1234'
+                    type:
                       code: localeCode
-                      value_: localeValue
-                    pledgeSubtype:
+                      value: localeValue
+                    subType:
                       code: localeCode
-                      value_: localeValue
+                      value: localeValue
                     pledgeOwner: Ivanov Ivan Ivanovich
-                    tin: "2542345233"
+                    tin: '2542345233'
                     estimateValue: 2342.12
-                    estimateDate: "2024-01-01T00:00:00"
+                    estimateDate: '2024-01-01T00:00:00'
                     cadastralValue: 2342.12
                     estimatorName: Ivanov Ivan Ivanovich
                     estimatorTin: Ivanov Ivan Ivanovich
@@ -773,33 +771,33 @@ components:
                   asoki:
                     pledgeStatus:
                       code: localeCode
-                      value_: localeValue
+                      value: localeValue
                     propertyRightsDescription: some text here
                     car: null
                     equipment:
                       factoryNumber: J8fsee6G
-                      registrationNumber: "12313321"
-                      commissioningDate: "2024-01-01T00:00:00"
+                      registrationNumber: '12313321'
+                      commissioningDate: '2024-01-01T00:00:00'
                       inventoryNumber: iu6bR^RHB
-                      productionDate: "2024-01-01T00:00:00"
-                      equipmentProducer: companyName
+                      productionDate: '2024-01-01T00:00:00'
+                      producer: companyName
                     immovable: null
             immovable:
               value:
                 error: null
                 payload:
                   general:
-                    pledgeId: "1234"
-                    pledgeType:
+                    oid: '1234'
+                    type:
                       code: localeCode
-                      value_: localeValue
-                    pledgeSubtype:
+                      value: localeValue
+                    subType:
                       code: localeCode
-                      value_: localeValue
-                    pledgeOwner: Ivanov Ivan Ivanovich
-                    tin: "2542345233"
+                      value: localeValue
+                    owner: Ivanov Ivan Ivanovich
+                    tin: '2542345233'
                     estimateValue: 2342.12
-                    estimateDate: "2024-01-01T00:00:00"
+                    estimateDate: '2024-01-01T00:00:00'
                     cadastralValue: 2342.12
                     estimatorName: Ivanov Ivan Ivanovich
                     estimatorTin: Ivanov Ivan Ivanovich
@@ -814,29 +812,29 @@ components:
                       code: some code
                       name: some name
                   asoki:
-                    pledgeStatus:
+                    status:
                       code: localeCode
-                      value_: localeValue
+                      value: localeValue
                     propertyRightsDescription: some text here
                     car: null
                     equipment: null
                     immovable:
                       cadastralNumber: vdjkwbhvs
-                      commissioningDate: "2024-01-01T00:00:00"
+                      commissioningDate: '2024-01-01T00:00:00'
                       region:
                         code: localeCode
-                        value_: localeValue
+                        value: localeValue
                       district:
                         code: localeCode
-                        value_: localeValue
+                        value: localeValue
                       area: 23412.12
                       constructionArea: 3412.12
                       usedArea: 20000
                       addressString: address string
-                      immovableCondition: condition
-                      immovableType:
+                      condition: condition
+                      type:
                         code: localeCode
-                        value_: localeValue
+                        value: localeValue
     SetTask:
       description: set task response
       content:
@@ -853,11 +851,11 @@ components:
                   taskId:
                     type: string
                     description: task ID
-                    example: "123"
+                    example: '123'
                   status:
-                    $ref: "#/components/schemas/Locale"
+                    $ref: '#/components/schemas/Locale'
                   executor:
-                    $ref: "#/components/schemas/User"
+                    $ref: '#/components/schemas/User'
             xml:
               name: setTaskResponse
     Error:
@@ -868,7 +866,7 @@ components:
             type: object
             properties:
               error:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
               payload:
                 type: object
                 example: null

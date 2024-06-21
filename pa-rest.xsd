@@ -10,7 +10,7 @@
     <xs:complexType name="locale">
         <xs:sequence>
             <xs:element name="code" type="xs:string" minOccurs="1" />
-            <xs:element name="value_" type="xs:string" minOccurs="0" />
+            <xs:element name="value" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="code_name">
@@ -31,46 +31,42 @@
     </xs:complexType>
     <xs:complexType name="tasks_item">
         <xs:sequence>
-            <xs:element name="task_id" type="xs:string" minOccurs="1" />
+            <xs:element name="oid" type="xs:string" minOccurs="1" />
             <xs:element name="due_date" type="xs:string" minOccurs="0" />
-            <xs:element name="pledge_type" type="locale" minOccurs="0" />
-            <xs:element name="pledge_owner" type="xs:string" minOccurs="0" />
-            <xs:element name="task_status" type="locale" minOccurs="0" />
-            <xs:element name="executor" type="user" minOccurs="0" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="general">
-        <xs:sequence>
-            <xs:element name="task_id" type="xs:string" minOccurs="1" />
-            <xs:element name="task_status" type="locale" minOccurs="0" />
-            <xs:element name="monitoring_executor" type="xs:string" minOccurs="0" />
-            <xs:element name="create_date" type="xs:string" minOccurs="0" />
+            <xs:element name="type" type="locale" minOccurs="0" />
+            <xs:element name="owner" type="xs:string" minOccurs="0" />
+            <xs:element name="status" type="locale" minOccurs="0" />
             <xs:element name="executor" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="pledge_estimate">
         <xs:sequence>
-            <xs:element name="pledge_type" type="locale" minOccurs="0" />
-            <xs:element name="prev_estimate_value" type="xs:float" minOccurs="0" />
+            <xs:element name="type" type="locale" minOccurs="0" />
+            <xs:element name="prev_value" type="xs:float" minOccurs="0" />
             <xs:element name="prev_create_date" type="xs:string" minOccurs="0" />
-            <xs:element name="pledge_id" type="xs:string" minOccurs="0" />
-            <xs:element name="cur_estimate_value" type="xs:float" minOccurs="0" />
+            <xs:element name="oid" type="xs:string" minOccurs="0" />
+            <xs:element name="cur_value" type="xs:float" minOccurs="0" />
             <xs:element name="cur_create_date" type="xs:string" minOccurs="0" />
             <xs:element name="commentary" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="contact_data">
         <xs:sequence>
-            <xs:element name="pledger_full_name" type="xs:string" minOccurs="0" />
+            <xs:element name="full_name" type="xs:string" minOccurs="0" />
             <xs:element name="phone_number" type="xs:string" minOccurs="0" />
-            <xs:element name="pledger_address" type="xs:string" minOccurs="0" />
+            <xs:element name="address" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="task_item">
         <xs:sequence>
-            <xs:element name="general" type="general" minOccurs="0" />
+            <xs:element name="oid" type="xs:string" minOccurs="1" />
+            <xs:element name="status" type="locale" minOccurs="0" />
+            <xs:element name="monitoring_executor" type="xs:string" minOccurs="0" />
+            <xs:element name="create_date" type="xs:string" minOccurs="0" />
+            <xs:element name="due_date" type="xs:string" minOccurs="0" />
+            <xs:element name="executor" type="xs:string" minOccurs="0" />
             <xs:element name="pledge_estimate" type="pledge_estimate" minOccurs="0" />
-            <xs:element name="contact_data" type="contact_data" minOccurs="0" />
+            <xs:element name="pledger_contact_data" type="contact_data" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="token_data">
@@ -152,7 +148,6 @@
     <xs:element name="tasks_request">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="user_id" type="xs:string" minOccurs="1" />
                 <xs:element name="offset" type="xs:int" minOccurs="1" />
                 <xs:element name="limit" type="xs:int" minOccurs="1" />
                 <xs:element name="filter_data" type="filter_data" minOccurs="1" />
@@ -199,10 +194,10 @@
 
     <xs:complexType name="general_pledge">
         <xs:sequence>
-            <xs:element name="pledge_id" type="xs:string" minOccurs="0" />
-            <xs:element name="pledge_type" type="locale" minOccurs="0" />
-            <xs:element name="pledge_subtype" type="locale" minOccurs="0" />
-            <xs:element name="pledge_owner" type="xs:string" minOccurs="0" />
+            <xs:element name="oid" type="xs:string" minOccurs="0" />
+            <xs:element name="type" type="locale" minOccurs="0" />
+            <xs:element name="sub_type" type="locale" minOccurs="0" />
+            <xs:element name="owner" type="xs:string" minOccurs="0" />
             <xs:element name="tin" type="xs:string" minOccurs="0" />
             <xs:element name="estimate_value" type="xs:float" minOccurs="0" />
             <xs:element name="estimate_date" type="xs:dateTime" minOccurs="0" />
@@ -222,9 +217,9 @@
 
     <xs:complexType name="car">
         <xs:sequence>
-            <xs:element name="car_type" type="xs:string" minOccurs="0" />
+            <xs:element name="type" type="xs:string" minOccurs="0" />
             <xs:element name="production_year" type="xs:string" minOccurs="0" />
-            <xs:element name="car_power" type="xs:string" minOccurs="0" />
+            <xs:element name="power" type="xs:string" minOccurs="0" />
             <xs:element name="engine_number" type="xs:string" minOccurs="0" />
             <xs:element name="shassis_number" type="xs:string" minOccurs="0" />
             <xs:element name="body_number" type="xs:string" minOccurs="0" />
@@ -242,7 +237,7 @@
             <xs:element name="commissioning_date" type="xs:string" minOccurs="0" />
             <xs:element name="inventory_number" type="xs:string" minOccurs="0" />
             <xs:element name="production_date" type="xs:string" minOccurs="0" />
-            <xs:element name="equipment_producer" type="xs:string" minOccurs="0" />        
+            <xs:element name="producer" type="xs:string" minOccurs="0" />        
         </xs:sequence>
     </xs:complexType>
 
@@ -256,14 +251,14 @@
             <xs:element name="construction_area" type="xs:float" minOccurs="0" />
             <xs:element name="used_area" type="xs:float" minOccurs="0" />
             <xs:element name="address_string" type="xs:string" minOccurs="0" />
-            <xs:element name="immovable_condition" type="xs:string" minOccurs="0" />
-            <xs:element name="immovable_type" type="locale" minOccurs="0" />
+            <xs:element name="condition" type="xs:string" minOccurs="0" />
+            <xs:element name="type" type="locale" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="asoki">
         <xs:sequence>
-            <xs:element name="pledge_status" type="locale" minOccurs="0" />
+            <xs:element name="status" type="locale" minOccurs="0" />
             <xs:element name="property_rights_description" type="xs:string" minOccurs="0" />
             <xs:element name="car" type="car" minOccurs="0" />
             <xs:element name="equipment" type="equipment" minOccurs="0" />
