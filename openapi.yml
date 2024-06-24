@@ -75,6 +75,27 @@ paths:
           $ref: '#/components/responses/GetTask'
         '500':
           $ref: '#/components/responses/Error'
+    put:
+      tags:
+        - tasks
+      parameters:
+        - name: id
+          in: path
+          description: Task ID
+          required: true
+          schema:
+            type: string
+            default: '123'
+      summary: Set task data
+      description: Set task status and executor
+      operationId: setTask
+      requestBody:
+        $ref: '#/components/requestBodies/SetTask'
+      responses:
+        '200':
+          $ref: '#/components/responses/SetTask'
+        '500':
+          $ref: '#/components/responses/Error'
   /pledge/{id}:
     get:
       tags:
@@ -95,20 +116,6 @@ paths:
           $ref: '#/components/responses/GetPledge'
         '500':
           $ref: '#/components/responses/Error'
-  /set_task:
-    post:
-      tags:
-        - tasks
-      summary: Set task data
-      description: Set task status and executor
-      operationId: setTask
-      requestBody:
-        $ref: '#/components/requestBodies/SetTask'
-      responses:
-        '200':
-          $ref: '#/components/responses/SetTask'
-        '500':
-          $ref: '#/components/responses/Error'
 components:
   schemas:
     User:
@@ -118,18 +125,10 @@ components:
           type: string
           description: user ID
           example: '100'
-        firstName:
+        fullName:
           type: string
-          description: first name
-          example: Ivan
-        lastName:
-          type: string
-          description: last name
-          example: Ivanov
-        middleName:
-          type: string
-          description: middle name
-          example: Ivanovich
+          description: full name
+          example: Ivanov Ivan Ivanovich
         login:
           type: string
           description: login
@@ -151,18 +150,19 @@ components:
           type: string
           description: due date
           example: '2024-01-01T00:00:00'
-        type:
-          $ref: '#/components/schemas/Locale'
-        owner:
-          type: string
-          description: pledge owner
-          example: Ivanov Ivan Ivanovich
+        pledge:
+          type: object
+          properties:
+            type:
+              $ref: '#/components/schemas/Locale'
+            owner:
+              type: string
+              description: pledge owner
+              example: Ivanov Ivan Ivanovich
         status:
           $ref: '#/components/schemas/Locale'
         executor:
-          type: string
-          description: task executor
-          example: Ivanov Ivan Ivanovich
+          $ref: '#/components/schemas/User'
       xml:
         name: tasksItem
     TaskItem:
@@ -175,9 +175,7 @@ components:
         status:
           $ref: '#/components/schemas/Locale'
         monitoringExecutor:
-          type: string
-          description: person, responsible for monitoring execution
-          example: Ivanov Ivan Ivanovich
+          $ref: '#/components/schemas/User'
         createDate:
           type: string
           description: task create date
@@ -187,10 +185,8 @@ components:
           description: task due date
           example: '2024-01-01T00:00:00'
         executor:
-          type: string
-          description: task executor
-          example: Ivanov Ivan Ivanovich
-        pledgeEstimate:
+          $ref: '#/components/schemas/User'
+        pledge:
           type: object
           description: pledge estimate
           properties:
@@ -220,19 +216,19 @@ components:
               type: string
               description: commentary
               example: default comment
-        pledgerContactData:
-          type: object
-          description: contact data
-          properties:
-            fullName:
+            commentaryEstimate:
+              type: string
+              description: commentary estimate
+              example: default comment
+            owner:
               type: string
               description: pledger full name
               example: Ivanov Ivan Ivanovich
-            phoneNumber:
+            ownerPhone:
               type: string
               description: phone number
               example: +7-960-444-44-55
-            address:
+            ownerAddress:
               type: string
               description: pledger address
               example: default address
@@ -488,22 +484,35 @@ components:
           schema:
             type: object
             properties:
-              taskId:
-                type: string
-                description: task ID
-                example: '123'
-              statusCode:
-                type: string
-                description: code of the status needed
-                example: new
-              executorId:
-                type: string
-                description: executor (user) ID
-                example: '123'
-            required:
-              - taskId
-              - statusCode
-              - executorId
+              status:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: code of the status needed
+                    example: new
+              pledge:
+                type: object
+                properties:
+                  commentary:
+                    type: string
+                    description: task comment
+                    example: default comment
+                  curValue:
+                    type: number
+                    description: current estimate value
+                    example: 2432.2354
+                  curCreateDate:
+                    type: string
+                    description: current estimate create date
+                    example: '2024-01-01T00:00:00'
+              executor:
+                type: object
+                properties:
+                  oid:
+                    type: string
+                    description: executor (user) ID
+                    example: '123'
             xml:
               name: setTaskRequest
       required: true
@@ -696,16 +705,7 @@ components:
                     cadastralValue: 2342.12
                     estimatorName: Ivanov Ivan Ivanovich
                     estimatorTin: Ivanov Ivan Ivanovich
-                  address:
-                    country:
-                      code: some code
-                      value: some name
-                    region:
-                      code: some code
-                      value: some name
-                    district:
-                      code: some code
-                      value: some name
+                  address: null
                   asoki:
                     status:
                       code: localeCode
@@ -835,7 +835,7 @@ components:
               payload:
                 type: object
                 properties:
-                  taskId:
+                  oid:
                     type: string
                     description: task ID
                     example: '123'
@@ -843,6 +843,21 @@ components:
                     $ref: '#/components/schemas/Locale'
                   executor:
                     $ref: '#/components/schemas/User'
+                  pledge:
+                    type: object
+                    properties:
+                      commentary:
+                        type: string
+                        description: task comment
+                        example: default comment
+                      curValue:
+                        type: number
+                        description: current estimate value
+                        example: 2432.2354
+                      curCreateDate:
+                        type: string
+                        description: current estimate create date
+                        example: '2024-01-01T00:00:00'
             xml:
               name: setTaskResponse
     Error:
