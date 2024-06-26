@@ -111,8 +111,8 @@
     <xs:complexType name="filter_data">
         <xs:sequence>
             <xs:element name="executors" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
-            <xs:element name="startDate" type="xs:string" minOccurs="0" />
-            <xs:element name="endDate" type="xs:string" minOccurs="0" />
+            <xs:element name="start_date" type="xs:string" minOccurs="0" />
+            <xs:element name="end_date" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
 
