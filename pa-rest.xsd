@@ -144,16 +144,6 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="set_task_request">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="pledge" type="pledge" minOccurs="1" />
-                <xs:element name="status" type="locale" minOccurs="1" />
-                <xs:element name="executor" type="user" minOccurs="1" />
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
     <xs:element name="set_task_response">
         <xs:complexType>
             <xs:sequence>
