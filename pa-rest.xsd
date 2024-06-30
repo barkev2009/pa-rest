@@ -80,6 +80,7 @@
             <xs:sequence>
                 <xs:element name="login" type="xs:string" minOccurs="1" />
                 <xs:element name="password" type="xs:string" minOccurs="1" />
+                <xs:element name="localization" type="xs:string" minOccurs="1" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
