@@ -75,6 +75,14 @@
             <xs:element name="user_data" type="user_data" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
+    <xs:complexType name="document">
+        <xs:sequence>
+            <xs:element name="oid" type="xs:string" minOccurs="0" />
+            <xs:element name="name" type="xs:string" minOccurs="0" />
+            <xs:element name="uri" type="xs:string" minOccurs="0" />
+            <xs:element name="size" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
     <xs:element name="auth_request">
         <xs:complexType>
             <xs:sequence>
@@ -104,7 +112,7 @@
 
     <xs:complexType name="tasks_response_payload">
         <xs:sequence>
-            <xs:element name="tasks_item" type="task_item" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="tasks_items" type="task_item" minOccurs="0" maxOccurs="unbounded" />
             <xs:element name="table_data" type="table_data" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
@@ -140,6 +148,24 @@
             <xs:sequence>
                 <xs:element name="error" type="error" minOccurs="0" />
                 <xs:element name="payload" type="tasks_response_payload" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="documents_response">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="error" type="error" minOccurs="0" />
+                <xs:element name="payload" type="document" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="document_response">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="error" type="error" minOccurs="0" />
+                <xs:element name="payload" type="document" minOccurs="1" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>

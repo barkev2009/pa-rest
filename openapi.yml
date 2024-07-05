@@ -11,6 +11,8 @@ tags:
     description: Getting pledge data
   - name: users
     description: Operations with users
+  - name: documents
+    description: Operations with documents
 servers:
   - url: http://fpc-uzpsb.fisgroup.ru:8080/platform/rs2/rest/endpoint
     description: Сервер проекта УзПСБ
@@ -108,6 +110,46 @@ paths:
           $ref: '#/components/responses/GetPledge'
         '500':
           $ref: '#/components/responses/Error'
+  /documents:
+    get:
+      tags:
+        - documents
+      summary: Get documents by task ID
+      description: Get documents by task ID
+      operationId: documents
+      parameters:
+        - name: id
+          in: query
+          description: task ID
+          required: true
+          schema:
+            type: string
+            default: '123'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetDocuments'
+        '500':
+          $ref: '#/components/responses/Error'
+  /document:
+    get:
+      tags:
+        - documents
+      summary: Get document by its ID
+      description: Get document by its ID
+      operationId: document
+      parameters:
+        - name: id
+          in: query
+          description: document ID
+          required: true
+          schema:
+            type: string
+            default: '123'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetDocument'
+        '500':
+          $ref: '#/components/responses/Error'
 components:
   schemas:
     User:
@@ -129,6 +171,27 @@ components:
           type: string
           description: user photo id
           example: '123'
+      xml:
+        name: user
+    Document:
+      type: object
+      properties:
+        oid:
+          type: string
+          description: document ID
+          example: '100'
+        name:
+          type: string
+          description: document name
+          example: some_doc.pdf
+        size:
+          type: integer
+          description: document size (bytes)
+          example: 12312431
+        uri:
+          type: string
+          description: document content in base64
+          example: data:image/png;base64,....
       xml:
         name: user
     TasksItem:
@@ -675,6 +738,48 @@ components:
                   $ref: '#/components/schemas/User'
             xml:
               name: getUsersResponse
+    GetDocuments:
+      description: successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                example: null
+              payload:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Document'
+            xml:
+              name: getDocumentsResponse
+          example:
+            error: null
+            payload:
+              - oid: '1'
+                name: doc1.pdf
+                size: 2431234
+              - oid: '2'
+                name: doc2.pdf
+                size: 34623
+              - oid: '3'
+                name: doc3.pdf
+                size: 98987234
+    GetDocument:
+      description: successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                example: null
+              payload:
+                $ref: '#/components/schemas/Document'
+            xml:
+              name: getDocumentsResponse
     GetPledge:
       description: successful response
       content:
