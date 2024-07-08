@@ -81,6 +81,9 @@
             <xs:element name="name" type="xs:string" minOccurs="0" />
             <xs:element name="uri" type="xs:string" minOccurs="0" />
             <xs:element name="size" type="xs:int" minOccurs="0" />
+            <xs:element name="mime_type" type="xs:string" minOccurs="0" />
+            <xs:element name="object_id" type="xs:string" minOccurs="0" />
+            <xs:element name="object_type" type="xs:string" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
     <xs:element name="auth_request">

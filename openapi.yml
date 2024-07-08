@@ -150,6 +150,51 @@ paths:
           $ref: '#/components/responses/GetDocument'
         '500':
           $ref: '#/components/responses/Error'
+    post:
+      tags:
+        - documents
+      summary: Create document in database
+      description: Create document in database
+      operationId: post_document
+      requestBody:
+        $ref: '#/components/requestBodies/Document'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetDocument'
+        '500':
+          $ref: '#/components/responses/Error'
+    put:
+      tags:
+        - documents
+      summary: Edit document in database by ID
+      description: Edit document in database by ID
+      operationId: put_document
+      requestBody:
+        $ref: '#/components/requestBodies/PutDocument'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetDocument'
+        '500':
+          $ref: '#/components/responses/Error'
+    delete:
+      tags:
+        - documents
+      summary: Delete document from database by ID
+      description: Delete document from database by ID
+      operationId: delete_document
+      parameters:
+        - name: id
+          in: query
+          description: document ID
+          required: true
+          schema:
+            type: string
+            default: '123'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteDocument'
+        '500':
+          $ref: '#/components/responses/Error'
 components:
   schemas:
     User:
@@ -180,6 +225,18 @@ components:
           type: string
           description: document ID
           example: '100'
+        objectId:
+          type: string
+          description: object ID
+          example: '100'
+        objectType:
+          type: string
+          description: object type
+          example: task
+        mimeType:
+          type: string
+          description: document mime type
+          example: image/png
         name:
           type: string
           description: document name
@@ -191,9 +248,9 @@ components:
         uri:
           type: string
           description: document content in base64
-          example: data:image/png;base64,....
+          example: ....
       xml:
-        name: user
+        name: document
     TasksItem:
       type: object
       properties:
@@ -536,6 +593,33 @@ components:
             xml:
               name: authRequest
       required: true
+    Document:
+      description: Document data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Document'
+          example:
+            objectId: '123'
+            objectType: task
+            mimeType: image/png
+            name: somedoc.png
+            uri: ...
+      required: true
+    PutDocument:
+      description: Document data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Document'
+          example:
+            oid: '1111'
+            objectId: '123'
+            objectType: task
+            mimeType: image/png
+            name: somedoc.png
+            uri: ...
+      required: true
     SetTask:
       description: Task data to set
       content:
@@ -780,6 +864,27 @@ components:
                 $ref: '#/components/schemas/Document'
             xml:
               name: getDocumentsResponse
+    DeleteDocument:
+      description: successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                example: null
+              payload:
+                $ref: '#/components/schemas/Document'
+            xml:
+              name: deleteDocumentsResponse
+          example:
+            error: null
+            payload:
+              oid: '100'
+              objectId: '231'
+              objectType: task
+              name: some_doc.png
     GetPledge:
       description: successful response
       content:
