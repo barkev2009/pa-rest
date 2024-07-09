@@ -926,6 +926,11 @@
                       "type": "string",
                       "description": "executor (user) ID",
                       "example": "123"
+                    },
+                    "login": {
+                      "type": "string",
+                      "description": "executor (user) login",
+                      "example": "some_login"
                     }
                   }
                 }
