@@ -236,9 +236,9 @@
             <xs:element name="commissioning_date" type="xs:string" minOccurs="0" />
             <xs:element name="region" type="locale" minOccurs="0" />
             <xs:element name="district" type="locale" minOccurs="0" />
-            <xs:element name="area" type="xs:float" minOccurs="0" />
-            <xs:element name="construction_area" type="xs:float" minOccurs="0" />
-            <xs:element name="used_area" type="xs:float" minOccurs="0" />
+            <xs:element name="area" type="xs:string" minOccurs="0" />
+            <xs:element name="construction_area" type="xs:string" minOccurs="0" />
+            <xs:element name="used_area" type="xs:string" minOccurs="0" />
             <xs:element name="address_string" type="xs:string" minOccurs="0" />
             <xs:element name="condition" type="xs:string" minOccurs="0" />
             <xs:element name="type" type="locale" minOccurs="0" />
