@@ -127,7 +127,20 @@ paths:
             default: '123'
       responses:
         '200':
-          $ref: '#/components/responses/GetDocuments'
+          $ref: '#/components/responses/PostDocuments'
+        '500':
+          $ref: '#/components/responses/Error'
+    post:
+      tags:
+        - documents
+      summary: Create documents in database
+      description: Create multiple documents in database
+      operationId: post_documents
+      requestBody:
+        $ref: '#/components/requestBodies/Documents'
+      responses:
+        '200':
+          $ref: '#/components/responses/PostDocuments'
         '500':
           $ref: '#/components/responses/Error'
   /document:
@@ -606,6 +619,26 @@ components:
             name: somedoc.png
             uri: ...
       required: true
+    Documents:
+      description: Multi-document data
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Document'
+          example:
+            - objectId: '123'
+              objectType: task
+              mimeType: image/png
+              name: somedoc.png
+              uri: ...
+            - objectId: '456'
+              objectType: task
+              mimeType: image/png
+              name: somedoc2.png
+              uri: ...
+      required: true
     PutDocument:
       description: Document data
       content:
@@ -664,6 +697,10 @@ components:
                     type: string
                     description: executor (user) ID
                     example: '123'
+                  login:
+                    type: string
+                    description: executor (user) login
+                    example: some_login
             xml:
               name: setTaskRequest
       required: true
@@ -862,6 +899,39 @@ components:
                 example: null
               payload:
                 $ref: '#/components/schemas/Document'
+            xml:
+              name: getDocumentsResponse
+    PostDocuments:
+      description: successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                example: null
+              payload:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Document'
+            example:
+              error: null
+              payload:
+                - oid: '123'
+                  objectId: '100'
+                  objectType: task
+                  mimeType: image/png
+                  name: some_doc.pdf
+                  size: 12312431
+                  uri: ....
+                - oid: '456'
+                  objectId: '100'
+                  objectType: task
+                  mimeType: image/png
+                  name: some_doc2.pdf
+                  size: 12312431
+                  uri: ....
             xml:
               name: getDocumentsResponse
     DeleteDocument:
