@@ -31,6 +31,32 @@ paths:
           $ref: '#/components/responses/Auth'
         '500':
           $ref: '#/components/responses/Error'
+    put:
+      tags:
+        - auth
+      summary: Refresh authorization token
+      description: 'Refresh access JWT-token '
+      operationId: put_auth
+      requestBody:
+        description: Refresh token
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+                  description: refresh token
+                  example: fbsrt5465b45634535
+              required:
+                - refreshToken
+              xml:
+                name: putAuthRequest
+      responses:
+        '200':
+          $ref: '#/components/responses/Auth'
+        '500':
+          $ref: '#/components/responses/Error'
   /tasks:
     post:
       tags:
