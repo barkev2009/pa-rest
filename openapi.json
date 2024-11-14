@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Personal Profile REST API (в стадии проработки)",
-    "version": "0.0.0"
+    "title": "Personal Profile REST API",
+    "version": "0.0.1"
   },
   "tags": [
     {
@@ -233,7 +233,7 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/PostDocuments"
+            "$ref": "#/components/responses/GetDocuments"
           },
           "500": {
             "$ref": "#/components/responses/Error"
@@ -1285,17 +1285,23 @@
                 {
                   "oid": "1",
                   "name": "doc1.pdf",
-                  "size": 2431234
+                  "size": 2431234,
+                  "objectId": "100",
+                  "objectType": "task"
                 },
                 {
                   "oid": "2",
                   "name": "doc2.pdf",
-                  "size": 34623
+                  "size": 34623,
+                  "objectId": "100",
+                  "objectType": "task"
                 },
                 {
                   "oid": "3",
                   "name": "doc3.pdf",
-                  "size": 98987234
+                  "size": 98987234,
+                  "objectId": "100",
+                  "objectType": "task"
                 }
               ]
             }
@@ -1351,8 +1357,7 @@
                     "objectType": "task",
                     "mimeType": "image/png",
                     "name": "some_doc.pdf",
-                    "size": 12312431,
-                    "uri": "...."
+                    "size": 12312431
                   },
                   {
                     "oid": "456",
@@ -1360,8 +1365,7 @@
                     "objectType": "task",
                     "mimeType": "image/png",
                     "name": "some_doc2.pdf",
-                    "size": 12312431,
-                    "uri": "...."
+                    "size": 12312431
                   }
                 ]
               },
